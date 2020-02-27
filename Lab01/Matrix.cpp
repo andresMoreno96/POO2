@@ -31,23 +31,16 @@ Matrix::Matrix(size_t n, size_t m, int mod, bool random) : n(n), m(m), mod(mod),
 }
 
 
-Matrix::Matrix(size_t n, size_t m, int mod, int **data): n(n), m(m), mod(mod) {
+
+Matrix::Matrix(const Matrix& matrix) : n(matrix.m), m(matrix.m), mod(matrix.mod) {
+
+    createData();
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
-            this->data[i][j] = data[i][j];
+            data[i][j] = matrix.data[i][j];
         }
     }
-
-}
-
-Matrix::Matrix(const Matrix& matrix) : Matrix(matrix.n, matrix.m, matrix.mod, matrix.data) {
-
-//    for (int i = 0; i < n; ++i) {
-//        for (int j = 0; j < m; ++j) {
-//            data[i][j] = matrix.data[i][j];
-//        }
-//    }
 }
 
 Matrix::~Matrix() {
@@ -110,7 +103,7 @@ void Matrix::calculate(const Matrix& m1, const Matrix& m2, Matrix& result, const
             int a = (i < m1.n && j < m1.m) ? m1.data[i][j] : 0;
             int b = (i < m2.n && j < m2.m) ? m2.data[i][j] : 0;
 
-            result.data[i][j] = abs(operation.apply(a, b)) % result.mod;
+            result.data[i][j] = (operation.apply(a, b) % result.mod + result.mod) % result.mod ;
         }
     }
 }

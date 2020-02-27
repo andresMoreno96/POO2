@@ -44,15 +44,6 @@ public:
      */
     Matrix(size_t n, size_t m, int mod, bool random = true);
 
-   /***
-    *
-    * @param n
-    * @param m
-    * @param mod
-    * @param data
-    */
-    Matrix(size_t n, size_t m, int mod, int **data);
-
     /**
      * @brief copy constructor.
      * @param matrix the matrix we desire to copy.

@@ -1,4 +1,4 @@
-# Install script for directory: /Users/andresmoreno/Documents/HEIG-VD/Third Year/Second Semester/POO2/Labos2020/Lab1/POO2_Lab01_Local
+# Install script for directory: /Users/andresmoreno/Documents/HEIG-VD/Third Year/Second Semester/POO2/Labos2020/POO2/Lab01
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/andresmoreno/Documents/HEIG-VD/Third Year/Second Semester/POO2/Labos2020/Lab1/POO2_Lab01_Local/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/andresmoreno/Documents/HEIG-VD/Third Year/Second Semester/POO2/Labos2020/POO2/Lab01/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
