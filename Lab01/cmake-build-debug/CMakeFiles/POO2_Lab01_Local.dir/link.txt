@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/POO2_Lab01_Local.dir/main.cpp.o CMakeFiles/POO2_Lab01_Local.dir/Matrix.cpp.o  -o POO2_Lab01_Local 
