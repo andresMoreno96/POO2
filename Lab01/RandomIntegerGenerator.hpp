@@ -15,6 +15,8 @@ public:
      *
      * @param min the minimum integer generated
      * @param max the maximum integer generated
+     *
+     * @throws invalid_argument If min is superior or equals to max
      */
     RandomIntegerGenerator(int min, int max);
 
@@ -23,11 +25,11 @@ public:
      *
      * @return the random integer generated
      */
-    size_t generate() const;
+    int generate() const;
 private:
     static bool seeded; // if rand() as already been seeded
-    size_t min; // min integer generated
-    size_t max; // max integer generated
+    int min; // min integer generated
+    int max; // max integer generated
 };
 
 
