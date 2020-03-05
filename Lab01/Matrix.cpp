@@ -5,6 +5,7 @@
  * Created on February 21, 2020, 3:46 PM
  */
 #include "Matrix.hpp"
+#include "RandomIntegerGenerator.hpp"
 #include <cstdlib>
 #include <ostream>
 
@@ -14,6 +15,8 @@ Matrix::Matrix() : Matrix(0, 0, 1) {}
 
 Matrix::Matrix(size_t n, size_t m, int mod, bool random) : n(n), m(m), mod(mod), data(nullptr) {
 
+    RandomIntegerGenerator::seed();
+
     if (mod <= 0) {
         throw runtime_error("invalid arguments");
     }
@@ -22,7 +25,7 @@ Matrix::Matrix(size_t n, size_t m, int mod, bool random) : n(n), m(m), mod(mod),
 
     for (size_t i = 0; i < n; ++i) {
         for (size_t j = 0; j < m; ++j) {
-            data[i][j] = random ? (int) 1 + rand() / (RAND_MAX + 1.0) * mod : 0;
+            data[i][j] = random ? RandomIntegerGenerator::generateRandomNumber(mod) : 0;
         }
     }
 }
@@ -192,9 +195,14 @@ ostream &operator<<(std::ostream &os, const Matrix &matrix) {
 
 Matrix &Matrix::operator=(const Matrix &matrix) {
 
+    if (this == &matrix){
+        return *this;
+    }
+
     clearData();
     this->n = matrix.n;
     this->m = matrix.m;
+    this->mod=matrix.mod;
     createData();
 
     for (int i = 0; i < n; ++i) {

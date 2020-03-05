@@ -11,25 +11,20 @@
 class RandomIntegerGenerator {
 public:
     /**
-     * @brief Random integer generator constructor
-     *
-     * @param min the minimum integer generated
-     * @param max the maximum integer generated
-     *
-     * @throws invalid_argument If min is superior or equals to max
+     * @brief generates a random number between 0 and n
+     * @param the upper number
+     * @return a random number between 0 and n
      */
-    RandomIntegerGenerator(int min, int max);
+    static int generateRandomNumber(int n);
 
     /**
-     * @brief generate a new random integer
-     *
-     * @return the random integer generated
+     * @brief initializes the srand() with time(null).
      */
-    int generate() const;
+    static void seed();
+
 private:
-    static bool seeded; // if rand() as already been seeded
-    int min; // min integer generated
-    int max; // max integer generated
+    static bool seeded; // if rand() has already been seeded
+
 };
 
 

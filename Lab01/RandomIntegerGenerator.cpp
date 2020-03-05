@@ -12,21 +12,19 @@
 
 bool RandomIntegerGenerator::seeded;
 
-RandomIntegerGenerator::RandomIntegerGenerator(int min, int max) {
-    if(!seeded) {
+
+int RandomIntegerGenerator::generateRandomNumber(int n) {
+
+    return (int) rand() / (RAND_MAX + 1.0) * n;
+}
+
+void RandomIntegerGenerator::seed() {
+
+    if (!seeded) {
         // seed rand()
-        srand(time(nullptr));
+        srand(time(NULL));
         seeded = true;
     }
 
-    if(min >= max) {
-        throw std::invalid_argument("Random integer generator's lower bound must be inferior to its upper bound.");
-    }
 
-    this->min = min;
-    this->max = max;
-}
-
-int RandomIntegerGenerator::generate() const {
-    return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
