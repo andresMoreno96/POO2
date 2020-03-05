@@ -79,6 +79,26 @@ int main() {
 
     }
 
+    cout << "-------------------Constant matrix-------------------" << endl;
+
+    const Matrix cm1(3,4,MOD);
+    const Matrix cm2(3,4,MOD);
+    const Matrix cm3(3,4,MOD);
+
+    Matrix tmp1(cm1);
+    Matrix tmp2(cm1);
+
+
+    cout << "M1" << endl << cm1 << endl;
+    cout << "M2" << endl << cm2 << endl;
+
+
+    cout << "By value" << endl;
+    cout << "M1 + M2" << endl << cm1.addVal(cm2) << endl;
+    cout << "M1 - M2" << endl << cm1.subVal(cm2) << endl;
+    cout << "M1 * M2" << endl << cm1.multiplyVal(cm2) << endl;
+
+
 
     return EXIT_SUCCESS;
 }

@@ -7,7 +7,6 @@
 
 #include <ctime>
 #include <cstdlib>
-#include <stdexcept>
 #include "RandomIntegerGenerator.hpp"
 
 bool RandomIntegerGenerator::seeded;

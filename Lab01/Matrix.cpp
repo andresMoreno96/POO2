@@ -100,7 +100,7 @@ void Matrix::calculate(const Matrix &m1, const Matrix &m2, Matrix &result, const
 
     // calculate new values
     for (int i = 0; i < result.n; ++i) {
-        for (int j = 0; j < result.n; ++j) {
+        for (int j = 0; j < result.m; ++j) {
 
             int a = (i < m1.n && j < m1.m) ? m1.data[i][j] : 0;
             int b = (i < m2.n && j < m2.m) ? m2.data[i][j] : 0;
