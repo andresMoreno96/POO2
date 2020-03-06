@@ -34,7 +34,6 @@ int main() {
         cout << "M1 - M2" << endl << m1.subVal(m2) << endl;
         cout << "M1 * M2" << endl << m1.multiplyVal(m2) << endl;
 
-
         cout << "By modifying the matrix that invokes the method" << endl;
         tmp1.add(m2);
         cout << "M1 + M2" << endl << tmp1 << endl;
@@ -62,7 +61,6 @@ int main() {
     cout << "-------------------different modulo-------------------" << endl;
 
     try {
-
         Matrix m5(3, 2, 2);
         cout << "M5" << endl << m5 << endl;
 
@@ -75,30 +73,56 @@ int main() {
 
     } catch (exception &e) {
         cout << e.what() << endl;
-
-
     }
 
     cout << "-------------------Constant matrix-------------------" << endl;
-
+    
     const Matrix cm1(3,4,MOD);
+    cout << "M1" << endl << cm1 << endl;
+
     const Matrix cm2(3,4,MOD);
-    const Matrix cm3(3,4,MOD);
+    cout << "M2" << endl << cm2 << endl;
 
     Matrix tmp1(cm1);
     Matrix tmp2(cm1);
-
-
-    cout << "M1" << endl << cm1 << endl;
-    cout << "M2" << endl << cm2 << endl;
-
+    Matrix tmp3(cm1);
 
     cout << "By value" << endl;
     cout << "M1 + M2" << endl << cm1.addVal(cm2) << endl;
     cout << "M1 - M2" << endl << cm1.subVal(cm2) << endl;
     cout << "M1 * M2" << endl << cm1.multiplyVal(cm2) << endl;
 
+    cout << "By modifying the matrix that invokes the method" << endl;
+    tmp1.add(cm2);
+    cout << "M1 + M2" << endl << tmp1 << endl;
+    tmp2.sub(cm2);
+    cout << "M1 - M2" << endl << tmp2 << endl;
+    tmp3.multiply(cm2);
+    cout << "M1 * M2" << endl << tmp3 << endl;
 
+    cout << "By pointer" << endl;
+    ptr = cm1.addPtr(cm2);
+    cout << "M1 + M2" << endl << *ptr << endl;
+    delete ptr;
+    ptr = cm1.subPtr(cm2);
+    cout << "M1 - M2" << endl << *ptr << endl;
+    delete ptr;
+    ptr = cm1.multiplyPtr(cm2);
+    cout << "M1 * M2" << endl << *ptr << endl;
+    delete ptr;
+
+    try {
+        Matrix cm5(3, 2, 2);
+        cout << "M5" << endl << cm5 << endl;
+
+        Matrix cm6(4, 3, 3);
+        cout << "M6" << endl << cm6 << endl;
+
+        cout << "By value" << endl;
+        cout << "M1 + M2" << endl << cm5.addVal(cm6) << endl;
+    } catch (exception &e) {
+        cout << e.what() << endl;
+    }
 
     return EXIT_SUCCESS;
 }
