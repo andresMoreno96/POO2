@@ -35,7 +35,7 @@ int main() {
     cout << "Lenght of \"Hello\": " << s.length() << endl;
     
     cout << "Get value: ";
-    char* c = s.getValue();
+    const char* c = s.getValue();
     for (size_t i = 0; i < strlen(c); ++i) {
         cout << c[i];
     }
@@ -92,7 +92,7 @@ int main() {
     String s2;
     cout << endl << "Read -> Enter a string: ";
     s2.read();
-    cout << "Your typed: " << s2 << endl;
+    cout << "You typed: " << s2 << endl;
     
     cout << endl << "Test operator overloads:" << endl << endl;
     

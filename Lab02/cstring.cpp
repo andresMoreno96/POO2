@@ -10,18 +10,17 @@
 #include <stdio.h>
 
 
-
 using namespace std;
 
 String::String() {
     createString("");
 }
 
-String::String(const char* str) {
+String::String(const char *str) {
     createString(str);
 }
 
-String::String(const String& str) : String(str.value) {}
+String::String(const String &str) : String(str.value) {}
 
 String::String(char c) {
     char str[] = {c, '\0'};
@@ -33,21 +32,23 @@ String::String(int val) {
     // Number of char needed to represent the integer in a string + '\0'
     size_t length = snprintf(nullptr, 0, "%d", val) + 1;
 
-    char str[length];
+    char *str = new char[length];
 
     snprintf(str, length, "%d", val);
 
     createString(str);
+
+    delete[] str;
 }
 
 String::String(double val) {
 
     // Number of char needed to represent the double in a string + '\0'
-    size_t length = snprintf(nullptr, 0, "%f", val) + 1;
+    size_t length = snprintf(nullptr, 0, "%g", val) + 1;
 
     char str[length];
 
-    snprintf(str, length, "%f", val);
+    snprintf(str, length, "%g", val);
 
     createString(str);
 }
@@ -56,13 +57,13 @@ String::String(bool val) {
     createString(val ? "true" : "false");
 }
 
-void String::createString(const char* str) {
+void String::createString(const char *str) {
 
     value = new char[strlen(str) + 1];
     strcpy(value, str);
 }
 
-size_t String::length()const {
+size_t String::length() const {
     return strlen(value);
 }
 
@@ -70,107 +71,143 @@ void String::print() {
     cout << *this << endl;
 }
 
-char* String::getValue()const {
+const char *String::getValue() {
     return value;
 }
 
-char& String::charAt(size_t index) {
+char &String::charAt(size_t index) {
 
     if (index >= strlen(value)) {
         throw std::out_of_range("Out of range");
     }
-    
+
     return value[index];
 }
 
-bool String::equals(const char* c) const {
+//just added
+const char &String::charAt(size_t index) const {
+
+    if (index >= strlen(value)) {
+        throw std::out_of_range("Out of range");
+    }
+
+    return value[index];
+}
+
+bool String::equals(const char *c) const {
     return strcmp(this->value, c) == 0;
 }
 
-bool String::equals(const String& str) const {
+bool String::equals(const String &str) const {
     return this->equals(str.value);
 }
 
-void String::setValue(const char* c) {
+String &String::setValue(const char *c) {
+    if (*this == c) {
+        return *this;
+    }
+
     delete[] value;
     createString(c);
+    return *this;
 }
 
-void String::setValue(const String& str) {
+String &String::setValue(const String &str) {
     this->setValue(str.value);
+    return *this;
 }
 
-void String::append(const char* c) {
+String &String::append(const char *c) {
 
     String tmp(*this);
 
     delete[] value;
-    value = new char [strlen(tmp.value) + strlen(c)];
+    value = new char[strlen(tmp.value) + strlen(c)];
 
     strcpy(value, tmp.value);
     strcat(value, c);
+
+    return *this;
 }
 
-void String::append(const String& str) {
+String &String::append(const String &str) {
     this->append(str.value);
+
+    return *this;
 }
 
-String String::subString(const size_t& start, const size_t& end) {
+String String::concat(const String &str) const {
+    return *this + str;
+}
+
+String String::concat(const char *c) const {
+    return *this + c;
+}
+
+String String::subString(const size_t &start, const size_t &end) const {
 
     if (start >= length() || end > length()) {
         throw std::out_of_range("Out of range");
     }
-    
+
     if (start >= end) {
         throw std::invalid_argument("Invalid argument: start must be lower than end.");
     }
-    
+
     size_t length = end - start;
-    char tmp[length + 1];
+    char *tmp = new char[length + 1];
     strncpy(tmp, value + start, length);
 
-    return String(tmp);
+    String tmp2(tmp);
+    delete[] tmp;
+    return tmp2;
 }
 
 void String::read() {
     cin >> *this;
 }
 
-String& String::operator+=(const char* c) {
+String &String::operator+=(const char *c) {
     this->append(c);
     return *this;
 }
 
-String String::operator+(const char* c) {
-    String tmp(*this);
-    return tmp += c;
-}
-
-String& String::operator+=(const String& str) {
+String &String::operator+=(const String &str) {
     this->append(str);
     return (*this);
 }
 
-String String::operator+(const String& str) {
-    String tmp(*this);
-    return tmp += str;
+String operator+(const String &str, const char *c) {
+    String tmp(str);
+    return tmp += c;
 }
 
-ostream & operator<<(ostream & out, const String & str) {
+String operator+(const char *c, const String &str) {
+
+    return str + c;
+}
+
+
+String operator+(const String &str1, const String &str2) {
+    String tmp(str1);
+    return tmp += str2;
+}
+
+ostream &operator<<(ostream &out, const String &str) {
     out << str.value;
     return out;
 }
 
-istream & operator>>(istream & in, String & str) {
+istream &operator>>(istream &in, String &str) {
 
-    delete [] str.value;
+    delete[] str.value;
     str.createString("");
 
     char c;
     int index = 0;
     const int BUFFER_SIZE = 100;
     char buffer[BUFFER_SIZE + 1]; // + 1 for '\0'
-    
+
     bool canRead = false;
     do {
 
@@ -196,35 +233,57 @@ istream & operator>>(istream & in, String & str) {
     return in;
 }
 
-char& String::operator[](size_t index) {
+char &String::operator[](size_t index) {
     return this->charAt(index);
 }
 
-bool String::operator==(const char* c)const {
-    return this->equals(c);
+const char &String::operator[](size_t index) const {
+    return this->charAt(index);
 }
 
-bool String::operator==(const String& str)const {
-    return this->equals(str);
+bool operator==(const String &str, const char *c) {
+    return str.equals(c);
 }
 
-bool String::operator!=(const char* c)const {
-    return !(*this == c);
+bool operator==(const char *c, const String &str) {
+    return str.equals(c);
 }
 
-bool String::operator!=(const String& str)const {
-    return !(*this == str);
+bool operator==(const String &str1, const String &str2) {
+    return str1.equals(str2);
 }
 
-String& String::operator=(const String& str) {
-    createString(str.value);
-    return *this;
+bool operator!=(const String &str, const char *c) {
+    return !(str == c);
+}
+
+bool operator!=(const char *c, const String &str) {
+    return (str != c);
+}
+
+bool operator!=(const String &str1, const String &str2) {
+    return !(str1 == str2);
+}
+
+
+String &String::operator=(const char *c) {
+
+    if (*this == c) {
+        return *this;
+    }
+
+    return setValue(c);
+}
+
+String &String::operator=(const String &str) {
+
+    return *this = str.value;
 }
 
 String::~String() {
-    
+
     if (value != nullptr) {
-        delete [] value;
+        delete[] value;
         value = nullptr;
     }
 }
