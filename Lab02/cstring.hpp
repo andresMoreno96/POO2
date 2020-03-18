@@ -6,7 +6,7 @@
  */
 
 #ifndef STRING_H
-#define    STRING_H
+#define STRING_H
 
 #include <iostream>
 
@@ -65,19 +65,19 @@ public:
     explicit String(bool val);
 
     /**
-     * 
+     * @brief get the string length
      * @return the length of the String
      */
     size_t length() const;
 
     /**
-     * 
+     * @brief get the string value
      * @return the value of the String
      */
     const char *getValue();
 
     /**
-     * 
+     * @brief get the char at a given position in the string
      * @param index the position
      * @return a reference to the character at position index in the String.
      * @throws out_of_range if the index is higher than the length of the String.
@@ -85,44 +85,46 @@ public:
     char &charAt(size_t index);
 
     /**
-     *
+     * @brief get the char at a given position in the string
      * @param index the position
      * @return a reference to the character at position index in the String.
      * @throws out_of_range if the index is higher than the length of the String.
      *
      */
-    //TODO need to test it on main
     const char &charAt(size_t index) const;
 
     /**
-     * 
+     * @brief get if this string is equals to a character string
      * @param c character string to compare
      * @return true if characters strings are equal otherwise false.
      */
     bool equals(const char *c) const;
 
     /**
-     * 
+     * @brief get if this string is equals to another string
      * @param str String to compare
      * @return true if both Strings are equal otherwise false.
      */
     bool equals(const String &str) const;
 
     /**
-     * @breif sets the given value to the String
+     * @brief sets the given value to the String
      * @param c the value we would like to set
+     * @return the string
      */
     String &setValue(const char *c);
 
     /**
      * @breif sets the given value to the String
      * @param str the new String value
+     * @return the string
      */
     String &setValue(const String &str);
 
     /**
      * @brief Appends a copy of a character string
      * @param c the character string
+     * @return the string
      */
     String &append(const char *c);
 
@@ -132,10 +134,18 @@ public:
      */
     String &append(const String &str);
 
-    //TODO
+    /**
+     * @brief Concat this string with another string into a new string
+     * @param c string to concat with
+     * @return a new string
+     */
     String concat(const String &str) const;
 
-    //TODO
+    /**
+     * @brief Concat this string with a character string into a new string
+     * @param c character string to concat with
+     * @return a new string
+     */
     String concat(const char *c) const;
 
     /**
@@ -151,13 +161,11 @@ public:
     /**
      * @brief prints a String
      */
-    //TODO
     void print();
 
     /**
      * @brief keyboard reading of a word and a line containing spaces.
      */
-    //TODO
     void read();
 
     /**
@@ -183,11 +191,27 @@ public:
      */
     char &operator[](size_t index);
 
-    //TODO
+    /**
+     * @brief overload the [] operator
+     * @param index the position
+     * @return reference to the character at position index in the String.
+     *
+     * @throws out_of_range if the index higher than the length of the String
+     */
     const char &operator[](size_t index) const;
 
+    /**
+     * @bried overload the = operator
+     * @param c the character string to assign
+     * @return the string
+     */
     String &operator=(const char *c);
 
+    /**
+     * @brief overload the = operator
+     * @param c string to assign
+     * @return the string
+     */
     String &operator=(const String &str);
 
 

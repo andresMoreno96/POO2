@@ -5,8 +5,8 @@
  * Created on March 7, 2019, 2:44 PM
  */
 
-#include <cstring>
 #include "cstring.hpp"
+#include <cstring>
 #include <iostream>
 #include <stdio.h>
 
@@ -84,14 +84,8 @@ char &String::charAt(size_t index) {
     return value[index];
 }
 
-//just added
 const char &String::charAt(size_t index) const {
-
-    if (index >= strlen(value)) {
-        throw std::out_of_range("Out of range");
-    }
-
-    return value[index];
+    return charAt(index);
 }
 
 bool String::equals(const char *c) const {
@@ -157,6 +151,7 @@ String String::subString(const size_t &start, const size_t &end) const {
     size_t length = end - start;
     char *tmp = new char[length + 1];
     strncpy(tmp, value + start, length);
+    tmp[length] = '\0';
 
     String tmp2(tmp);
     delete[] tmp;
@@ -183,8 +178,8 @@ String operator+(const String &str, const char *c) {
 }
 
 String operator+(const char *c, const String &str) {
-
-    return str + c;
+    String tmp(c);
+    return tmp + str;
 }
 
 
