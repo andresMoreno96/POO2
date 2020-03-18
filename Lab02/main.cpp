@@ -5,10 +5,10 @@
  * Created on March 7, 2019, 2:37 PM
  */
 
+#include <cstring>
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
-
 #include <string>
 #include "cstring.hpp"
 
