@@ -1,5 +1,5 @@
 /* 
- * File:   String.hpp
+ * File:   cstring.hpp
  * Author: Andres Moreno , Simon Walther
  *
  * Created on March 7, 2020, 2:44 PM

@@ -1,12 +1,12 @@
 /* 
- * File:   String.cpp
+ * File:   cstring.cpp
  * Author: Andres Moreno , Simon Walther
  * 
- * Created on March 7, 2019, 2:44 PM
+ * Created on March 7, 2020, 2:44 PM
  */
 
 #include "cstring.hpp"
-#include <cstring>
+#include <string>
 #include <iostream>
 #include <stdio.h>
 

@@ -2,10 +2,10 @@
  * File:   main.cpp
  * Author: Andres Moreno , Simon Walther
  *
- * Created on March 7, 2019, 2:37 PM
+ * Created on March 7, 2020, 2:37 PM
  */
 
-#include <cstring>
+
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
