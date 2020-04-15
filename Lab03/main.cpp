@@ -6,15 +6,10 @@
  */
 
 #include <cstdlib>
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <functional>
-#include <limits>
 
-#include "Person.h"
-#include "Controller.h"
-#include "Constraint.h"
+#include "Person.hpp"
+#include "Controller.hpp"
+#include "Constraint.hpp"
 
 using namespace std;
 

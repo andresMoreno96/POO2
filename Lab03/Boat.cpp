@@ -5,8 +5,9 @@
  * Created on May 16, 2019
  */
 
-#include "Container.h"
-#include "Boat.h"
+#include "Container.hpp"
+#include "Boat.hpp"
+#include "Controller.hpp"
 
 #include <string>
 
@@ -51,5 +52,5 @@ void Boat::changeBank(const Bank* bank) {
 }
 
 bool Boat::hasSpace() const {
-    return personsCount() < 2;
+    return personsCount() < Controller::getBoatCapacity();
 }

@@ -1,63 +1,106 @@
 /*
  * File:   Constraint.cpp
- * Author: Nohan Budry, Andres Moreno
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 18, 2019
+ * Created on April 10, 2020
  */
 
-#include "Constraint.h"
-#include "Container.h"
-#include "Person.h"
+#include "Constraint.hpp"
+#include "Container.hpp"
+#include "Person.hpp"
 
 Constraint::Constraint(const std::string& message): MESSAGE(message) {}
+
+std::list<const Person *> Constraint::createTemporaryList(const Container &container, const Person *person) const {
+    std::list<const Person *> tmp;
+
+    for (const Person *p : container.persons()) {
+
+        tmp.push_back(p);
+    }
+
+    if (container.contains(person)) { //from
+        tmp.remove(person);
+    } else { //to
+        tmp.push_back(person);
+    }
+
+    return tmp;
+}
 
 ThiefConstraint::ThiefConstraint()
 : Constraint("voleur avec un membre de la famille sans le policier") {}
 
-bool ThiefConstraint::check(const Container& container) const {
-    
-    return !(container.contains([](const Person* p) {
-        return p->type() == THIEF;
-    }) && container.contains([](const Person* p) {
-        return p->type() == PARENT || p->type() == CHILD;
-    }) && !(container.contains([](const Person* p){
-        return p->type() == POLICEMAN;
-    })));
-}
+bool ThiefConstraint::check(const Container& container, const Person* person) const {
 
-SonConstraint::SonConstraint() : Constraint("fils avec sa mere sans son pere") {}
+    std::list<const Person *> tmp= createTemporaryList(container,person);
 
-bool SonConstraint::check(const Container& container) const {
-    
-    for (const Person* person : container.persons()) {
-        if (person->type() == CHILD && person->sex() == MALE) {
-            
-            const Child* son = (const Child*) person;
+        return !(container.contains(tmp, [](const Person *p) {
+            return p->type() == THIEF;
+        }) && (container.contains(tmp, [](const Person *p) {
+            return p->type() == PARENT || p->type() == CHILD;
+        })) && !(container.contains(tmp, [](const Person *p) {
+            return p->type() == POLICEMAN;
+        })));
+
+
+    }
+
+
+SonConstraint::SonConstraint() : Constraint("garcon avec sa mere sans son pere") {}
+
+bool SonConstraint::check(const Container& container, const Person* person) const {
+
+    std::list<const Person *> tmp= createTemporaryList(container,person);
+
+    for (auto it = tmp.begin(); it != tmp.end(); it++) {
+        if ((*it)->type() == CHILD && (*it)->sex() == MALE) {
+
+            const Child *son = (const Child *) *it;
+
+            if ((find(tmp.begin(), tmp.end(), son->mother()) != tmp.end()) &&
+                !(find(tmp.begin(), tmp.end(), son->father()) != tmp.end())) {
+
+
+                return false;
+            }
+
             if (container.contains(son->mother())
                 && !container.contains(son->father())) {
-                
+
                 return false;
             }
         }
     }
     return true;
+
 }
 
 DaughterConstraint::DaughterConstraint()
 : Constraint("fille avec son pere sans sa mere") {}
 
-bool DaughterConstraint::check(const Container& container) const {
-    
-    for (const Person* person : container.persons()) {
-        if (person->type() == CHILD && person->sex() == FEMALE) {
-            
-            const Child* daughter = (const Child*) person;
-            if (container.contains(daughter->father())
-                && !container.contains(daughter->mother())) {
-                
+bool DaughterConstraint::check(const Container& container, const Person* person) const {
+
+
+    std::list<const Person *> tmp= createTemporaryList(container,person);
+
+    for (auto it = tmp.begin(); it != tmp.end(); it++) {
+        if ((*it)->type() == CHILD && (*it)->sex() == FEMALE) {
+
+            const Child *son = (const Child *) *it;
+
+            if (!(find(tmp.begin(), tmp.end(), son->mother()) != tmp.end()) &&
+                (find(tmp.begin(), tmp.end(), son->father()) != tmp.end())) {
+                return false;
+            }
+
+            if (!container.contains(son->mother())
+                && container.contains(son->father())) {
+
                 return false;
             }
         }
     }
     return true;
+
 }

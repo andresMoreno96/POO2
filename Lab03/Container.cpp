@@ -5,7 +5,7 @@
  * Created on May 9, 2019
  */
 
-#include "Container.h"
+#include "Container.hpp"
 
 #include <string>
 #include <list>
@@ -62,6 +62,19 @@ bool Container::contains(std::function<bool(const Person*)> f) const {
     return false;
 }
 
+bool Container::contains(list<const Person* >persons,std::function<bool(const Person*)> f) const {
+
+    for(auto it=persons.begin(); it!=persons.end(); it++) {
+        if (f(*it)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+
 bool Container::contains(const Person* person) const {
     return contains([&](const Person* p){
         return person == p;
@@ -71,3 +84,5 @@ bool Container::contains(const Person* person) const {
 void Container::empty() {
     _persons.clear();
 }
+
+

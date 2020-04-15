@@ -5,7 +5,7 @@
  * Created on May 16, 2019
  */
 
-#include "Person.h"
+#include "Person.hpp"
 
 #include <string>
 #include <iostream>
@@ -25,6 +25,10 @@ PersonType Person::type() const {
 
 Sex Person::sex() const {
     return _sex;
+}
+
+Person::~Person() {
+
 }
 
 Policeman::Policeman(std::string name, Sex sex): Person(name, POLICEMAN, sex) {}
