@@ -6,8 +6,8 @@
  */
 
 #include <iostream>
+#include <iomanip>
 #include <string>
-
 #include "Controller.hpp"
 #include "Person.hpp"
 #include "Container.hpp"
@@ -24,26 +24,29 @@ Controller::Controller(const std::vector<const Person *>& persons,
 }
 
 void Controller::showMenu() const {
-    cout << PRINT << "      : afficher" << endl;
-    cout << BOARD << " <nom>: embarquer <nom>" << endl;
-    cout << UNBOARD << " <nom>: debarquer <nom>" << endl;
-    cout << MOVE_BOAT << "      : deplacer bateau" << endl;
-    cout << RESTART << "      : reinitialiser" << endl;
-    cout << QUIT << "      : quitter" << endl;
-    cout << MENU << "      : menu" << endl;
+    size_t keyTextSize = 7;
+
+    cout << left;
+    cout << setw(keyTextSize) << PRINT << ": afficher" << endl;
+    cout << BOARD << " <nom>" << ": embarquer <nom>" << endl;
+    cout << UNBOARD << " <nom>" << ": debarquer <nom>" << endl;
+    cout << setw(keyTextSize) << MOVE_BOAT << ": deplacer bateau" << endl;
+    cout << setw(keyTextSize) << RESTART << ": reinitialiser" << endl;
+    cout << setw(keyTextSize) << QUIT << ": quitter" << endl;
+    cout << setw(keyTextSize) << MENU << ": menu" << endl;
 }
 
 void Controller::display() const {
-    static int SIZE = 80;
-    cout << string(SIZE, '-') << endl;
+    size_t size = 80;
+    cout << string(size, '-') << endl;
     cout << leftBank << endl;
-    cout << string(SIZE, '-') << endl;
+    cout << string(size, '-') << endl;
     boat.isInBank(&leftBank) ? cout << boat << endl : cout << endl;
-    cout << string(SIZE, '=') << endl;
+    cout << string(size, '=') << endl;
     boat.isInBank(&rightBank) ? cout << boat << endl : cout << endl;
-    cout << string(SIZE, '-') << endl;
+    cout << string(size, '-') << endl;
     cout << rightBank << endl;
-    cout << string(SIZE, '-') << endl;
+    cout << string(size, '-') << endl;
 }
 
 void Controller::reset() {

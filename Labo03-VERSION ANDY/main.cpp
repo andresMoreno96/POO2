@@ -1,8 +1,8 @@
 /*
  * File:   main.cpp
- * Author: Nohan Budry, Andres Moreno
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 9, 2019
+ * Created on April 10, 2020
  */
 
 #include <cstdlib>

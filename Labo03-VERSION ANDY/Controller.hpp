@@ -35,8 +35,6 @@ private:
     const char QUIT = 'q';
     const char MENU = 'h';
 
-
-    
     bool playing = true;
     unsigned turn = 0;
     

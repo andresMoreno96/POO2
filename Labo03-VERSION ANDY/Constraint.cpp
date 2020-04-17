@@ -5,6 +5,7 @@
  * Created on April 10, 2020
  */
 
+#include <algorithm>
 #include "Constraint.hpp"
 #include "Container.hpp"
 #include "Person.hpp"

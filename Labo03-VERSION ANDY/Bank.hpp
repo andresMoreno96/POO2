@@ -1,8 +1,8 @@
 /*
- * File:   Bank.h
- * Author: Nohan Budry, Andres Moreno
+ * File:   Bank.hpp
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 9, 2019
+ * Created on April 10, 2020
  */
 
 #ifndef BANK_H

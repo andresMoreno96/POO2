@@ -1,8 +1,12 @@
-//
-// Created by Andres Moreno on 15.04.20.
-//
+/*
+ * File:   Role.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on April 15, 2020
+ */
 
 #include "Role.hpp"
+
 Role::Role(const std::string &role) : _role(role) {}
 
 Role::~Role() {}

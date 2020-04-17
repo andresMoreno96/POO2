@@ -1,16 +1,17 @@
 /*
- * File:   Person.h
- * Author: Nohan Budry, Andres Moreno
+ * File:   Person.hpp
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 9, 2019
+ * Created on April 10, 2020
  */
 
 #ifndef PERSON_H
-#define    PERSON_H
+#define PERSON_H
 
 #include <string>
 #include <iostream>
 #include <list>
+#include <vector>
 #include "Role.hpp"
 
 // The sex of a person
@@ -56,12 +57,6 @@ public:
      */
     Sex sex() const;
 
-    /**
-     * Checks if the person is able to drive.
-     * @return true if the person can drive, false otherwise
-     */
-//    virtual bool canDrive() const = 0;
-
     virtual ~Person();
 };
 
@@ -77,8 +72,6 @@ public:
      * @param sex the sex of the policeman
      */
     Policeman(std::string name, Sex sex, const std::vector<const Role *> &roles);
-
-//    virtual bool canDrive() const;
 };
 
 /**
@@ -93,8 +86,6 @@ public:
      * @param sex the sex of the thief
      */
     Thief(std::string name, Sex sex, const std::vector<const Role *> &roles);
-
-//    virtual bool canDrive() const;
 };
 
 /**
@@ -109,8 +100,6 @@ public:
      * @param sex the sex of the parent
      */
     Parent(std::string name, Sex sex, const std::vector<const Role *> &roles);
-
-//    virtual bool canDrive() const;
 };
 
 /**
@@ -144,8 +133,6 @@ public:
      * @return const Parent*
      */
     const Parent *mother() const;
-
-//    virtual bool canDrive() const;
 };
 
 #endif    /* PERSON_H */

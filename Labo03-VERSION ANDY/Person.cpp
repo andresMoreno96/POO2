@@ -1,8 +1,8 @@
 /*
  * File:   Person.cpp
- * Author: Nohan Budry, Andres Moreno
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 16, 2019
+ * Created on April 10, 2020
  */
 
 #include "Person.hpp"
@@ -28,7 +28,6 @@ Person::~Person() {
 
 }
 
-
 bool Person::hasRole(const std::string &role) const {
 
     for (auto it = roles.begin(); it != roles.end(); it++) {
@@ -39,7 +38,6 @@ bool Person::hasRole(const std::string &role) const {
 
     return false;
 }
-
 
 Policeman::Policeman(std::string name, Sex sex, const vector<const Role *> &roles)
         : Person(name, sex, roles) {}
