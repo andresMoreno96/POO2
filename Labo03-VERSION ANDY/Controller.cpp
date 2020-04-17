@@ -72,7 +72,7 @@ void Controller::move(const Person *person, bool board) {
     Bank &bank = boat.bank() == &leftBank ? leftBank : rightBank;
 
     if (board) {
-        if (boat.hasSpace() && bank.contains(person)
+        if (bank.contains(person)
             && movePerson(person, bank, boat)) {
 
             display();
@@ -101,13 +101,17 @@ void Controller::unboard(const Person *person) {
 
 void Controller::moveBoat() {
 
-    nextTurn();
+    if(boat.personsCount() == 0) {
+        cout << "### il n'y a pas de passager" << endl;
+    } else {
+        nextTurn();
 
-    if (boat.canChangeBank()) {
-        Bank *bank = boat.bank() == &leftBank ? &rightBank : &leftBank;
-        boat.changeBank(bank);
+        if (boat.canChangeBank()) {
+            Bank *bank = boat.bank() == &leftBank ? &rightBank : &leftBank;
+            boat.changeBank(bank);
 
-        display();
+            display();
+        }
     }
 }
 
@@ -162,13 +166,13 @@ void Controller::processCommand(char command, const std::string &argument) {
         if (person != nullptr) {
             board(person);
         } else {
-            std::cout << "### Unknown person." << std::endl;
+            cout << "### personne inconnue" << endl;
         }
     } else if (command == UNBOARD) {
         if (person != nullptr) {
             unboard(person);
         } else {
-            std::cout << "### Unknown person." << std::endl;
+            cout << "### personne inconnue" << endl;
         }
     } else if (command == MOVE_BOAT) {
         moveBoat();
@@ -179,11 +183,13 @@ void Controller::processCommand(char command, const std::string &argument) {
         playing = false;
     } else if (command == MENU) {
         showMenu();
+    } else {
+        cout << "### entrée invalide" << endl;
     }
 
 }
 
-const Person *Controller::personNamed(const std::string &name) {
+const Person *Controller::personNamed(const string &name) {
     for (const Person *person : persons) {
         if (name.compare(person->name()) == 0) {
             return person;
@@ -202,7 +208,6 @@ bool Controller::checkConstraints(const Container &container, const Person* pers
     }
     return true;
 }
-
 
 const size_t Controller::getBoatCapacity() {
     return BOAT_CAPACITY;

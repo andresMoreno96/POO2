@@ -26,6 +26,8 @@ Boat::Boat(std::string name, size_t capacity, const Bank* bank)
 void Boat::addPerson(const Person* p) {
     if (hasSpace()) {
         Container::addPerson(p);
+    } else {
+        cout << "### il n'y a plus de place dans le bateau" << endl;
     }
 }
 
@@ -44,6 +46,9 @@ bool Boat::canChangeBank() const {
             return true;
         }
     }
+
+    cout << "### les personnes sur le bateau ne peuvent pas conduire" << endl;
+
     return false;
 }
 
