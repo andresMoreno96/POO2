@@ -51,7 +51,6 @@ public:
      */
     virtual void removePerson(const Person* p);
 
-
     /**
      * Gets the count of persons in the container.
      * @return size_t
@@ -77,7 +76,6 @@ public:
      * @return true if at least one person verifies the function
      */
     bool contains(std::function<bool(const Person*)> f) const;
-
 
     /***
      * Checks if at least one person in the container
