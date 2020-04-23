@@ -14,11 +14,10 @@
  * Represents a constraint in a container
  */
 class Constraint {
-    
-public:
-    
     /// Message of the constraint to display when it fails.
     const std::string MESSAGE;
+
+public:
     
     /**
      * Creates a new contraint.
@@ -33,8 +32,19 @@ public:
      */
     virtual bool check(const Container& container, const Person* person) const = 0;
 
+    /**
+     * Create a copy of a container's persons list and move the person in this new list
+     * @param container the container from which to copy the persons list
+     * @param person the person to move
+     * @return the temporary list
+     */
     std::list<const Person* > createTemporaryList(const Container& container, const Person* person) const;
 
+    /**
+     * Get the constraint message
+     * @return the message
+     */
+    const std::string& getMessage() const;
 };
 
 /**

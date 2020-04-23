@@ -30,6 +30,10 @@ std::list<const Person *> Constraint::createTemporaryList(const Container &conta
     return tmp;
 }
 
+const std::string& Constraint::getMessage() const {
+    return MESSAGE;
+}
+
 ThiefConstraint::ThiefConstraint()
         : Constraint("voleur avec un membre de la famille sans le policier") {}
 

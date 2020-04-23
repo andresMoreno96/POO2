@@ -202,7 +202,7 @@ bool Controller::checkConstraints(const Container &container, const Person* pers
 
     for (const Constraint *constraint : constraints) {
         if (!constraint->check(container,person)) {
-            cout << "### " << constraint->MESSAGE << endl;
+            cout << "### " << constraint->getMessage() << endl;
             return false;
         }
     }
