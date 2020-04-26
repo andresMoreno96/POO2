@@ -1,8 +1,8 @@
 /*
  * File:   Boat.cpp
- * Author: Nohan Budry, Andres Moreno
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 16, 2019
+ * Created on April 10, 2020
  */
 
 #include "Container.hpp"
@@ -26,6 +26,8 @@ Boat::Boat(std::string name, size_t capacity, const Bank* bank)
 void Boat::addPerson(const Person* p) {
     if (hasSpace()) {
         Container::addPerson(p);
+    } else {
+        cout << "### il n'y a plus de place dans le bateau" << endl;
     }
 }
 
@@ -40,10 +42,13 @@ bool Boat::isInBank(const Bank* bank) const {
 bool Boat::canChangeBank() const {
     
     for (const Person* p : persons()) {
-        if (p->canDrive()) {
+        if (p->hasRole("DRIVE")) {
             return true;
         }
     }
+
+    cout << "### les personnes sur le bateau ne peuvent pas conduire" << endl;
+
     return false;
 }
 

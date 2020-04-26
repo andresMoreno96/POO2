@@ -1,65 +1,61 @@
 /*
- * File:   Person.h
- * Author: Nohan Budry, Andres Moreno
+ * File:   Person.hpp
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 9, 2019
+ * Created on April 10, 2020
  */
 
 #ifndef PERSON_H
-#define	PERSON_H
+#define PERSON_H
 
 #include <string>
 #include <iostream>
 #include <list>
-
-/// The type of a person
-enum PersonType {POLICEMAN, THIEF, PARENT, CHILD};
+#include <vector>
+#include "Role.hpp"
 
 // The sex of a person
-enum Sex {MALE, FEMALE};
+enum Sex {
+    MALE, FEMALE
+};
 
 /**
  * Represents a person with its name, type and sex.
  */
 class Person {
-    
-    const PersonType _type;
+
+    const std::vector<const Role *> &roles;
     const Sex _sex;
     std::string _name;
-    
+
 public:
-    
+    /***
+     * checks if the current person has the given role
+     * @param role the role of the person
+     * @return true if the person has that role
+     */
+    bool hasRole(const std::string &role) const;
+
     /**
      * Creates a new person.
      * @param name the name of the person
      * @param type the type of the person
      * @param sex the sex of the person
      */
-    Person(const std::string& name, const PersonType type, Sex sex);
-    
+    Person(const std::string &name, Sex sex,
+           const std::vector<const Role *> &roles);
+
     /**
      * Returns the name of the person.
      * @return string
      */
-    const std::string& name() const;
-    
-    /**
-     * Returns the type of the person.
-     * @return PersonType
-     */
-    PersonType type() const;
-    
+    const std::string &name() const;
+
     /**
      * Returns the sex of the person.
      * @return Sex
      */
     Sex sex() const;
-    
-    /**
-     * Checks if the person is able to drive.
-     * @return true if the person can drive, false otherwise
-     */
-    virtual bool canDrive() const = 0;
 
     virtual ~Person();
 };
@@ -69,15 +65,13 @@ public:
  */
 class Policeman : public Person {
 public:
-    
+
     /**
      * Creates a new policeman.
      * @param name the name of the policeman
      * @param sex the sex of the policeman
      */
-    Policeman(std::string name, Sex sex);
-    
-    virtual bool canDrive() const;
+    Policeman(std::string name, Sex sex, const std::vector<const Role *> &roles);
 };
 
 /**
@@ -85,15 +79,13 @@ public:
  */
 class Thief : public Person {
 public:
-    
+
     /**
      * Creates a new thief.
      * @param name the name of the thief
      * @param sex the sex of the thief
      */
-    Thief(std::string name, Sex sex);
-    
-    virtual bool canDrive() const;
+    Thief(std::string name, Sex sex, const std::vector<const Role *> &roles);
 };
 
 /**
@@ -101,27 +93,25 @@ public:
  */
 class Parent : public Person {
 public:
-    
+
     /**
      * Creates a new parent.
      * @param name the name of the parent
      * @param sex the sex of the parent
      */
-    Parent(std::string name, Sex sex);
-    
-    virtual bool canDrive() const;
+    Parent(std::string name, Sex sex, const std::vector<const Role *> &roles);
 };
 
 /**
  * Represents a Child
  */
 class Child : public Person {
-    
-    const Parent* _father;
-    const Parent* _mother;
-    
+
+    const Parent *_father;
+    const Parent *_mother;
+
 public:
-    
+
     /**
      * Creates a new child.
      * @param name the name of the child
@@ -129,22 +119,21 @@ public:
      * @param father the father of the child
      * @param mother the mother of the child
      */
-    Child(std::string name, Sex sex, const Parent* father, const Parent* mother);
-    
+    Child(std::string name, Sex sex, const Parent *father,
+          const Parent *mother, const std::vector<const Role *> &roles);
+
     /**
      * Returns the father of the child.
      * @return const Parent*
      */
-    const Parent* father() const;
-    
+    const Parent *father() const;
+
     /**
      * Returns the mother of the child.
      * @return const Parent*
      */
-    const Parent* mother() const;
-    
-    virtual bool canDrive() const;
+    const Parent *mother() const;
 };
 
-#endif	/* PERSON_H */
+#endif    /* PERSON_H */
 

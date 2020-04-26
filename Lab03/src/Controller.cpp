@@ -6,8 +6,8 @@
  */
 
 #include <iostream>
+#include <iomanip>
 #include <string>
-
 #include "Controller.hpp"
 #include "Person.hpp"
 #include "Container.hpp"
@@ -15,8 +15,8 @@
 
 using namespace std;
 
-Controller::Controller(const std::vector<const Person *> persons,
-                       const std::vector<const Constraint *> constraints)
+Controller::Controller(const std::vector<const Person *>& persons,
+                       const std::vector<const Constraint *>& constraints)
         : persons(persons), constraints(constraints), leftBank("Gauche"),
           rightBank("Droite"), boat("Bateau", BOAT_CAPACITY, &leftBank) {
 
@@ -24,26 +24,29 @@ Controller::Controller(const std::vector<const Person *> persons,
 }
 
 void Controller::showMenu() const {
-    cout << PRINT << "      : afficher" << endl;
-    cout << BOARD << " <nom>: embarquer <nom>" << endl;
-    cout << UNBOARD << " <nom>: debarquer <nom>" << endl;
-    cout << MOVE_BOAT << "      : deplacer bateau" << endl;
-    cout << RESTART << "      : reinitialiser" << endl;
-    cout << QUIT << "      : quitter" << endl;
-    cout << MENU << "      : menu" << endl;
+    size_t keyTextSize = 7;
+
+    cout << left;
+    cout << setw(keyTextSize) << PRINT << ": afficher" << endl;
+    cout << BOARD << " <nom>" << ": embarquer <nom>" << endl;
+    cout << UNBOARD << " <nom>" << ": debarquer <nom>" << endl;
+    cout << setw(keyTextSize) << MOVE_BOAT << ": deplacer bateau" << endl;
+    cout << setw(keyTextSize) << RESTART << ": reinitialiser" << endl;
+    cout << setw(keyTextSize) << QUIT << ": quitter" << endl;
+    cout << setw(keyTextSize) << MENU << ": menu" << endl;
 }
 
 void Controller::display() const {
-    static int SIZE = 80;
-    cout << string(SIZE, '-') << endl;
+    size_t size = 80;
+    cout << string(size, '-') << endl;
     cout << leftBank << endl;
-    cout << string(SIZE, '-') << endl;
+    cout << string(size, '-') << endl;
     boat.isInBank(&leftBank) ? cout << boat << endl : cout << endl;
-    cout << string(SIZE, '=') << endl;
+    cout << string(size, '=') << endl;
     boat.isInBank(&rightBank) ? cout << boat << endl : cout << endl;
-    cout << string(SIZE, '-') << endl;
+    cout << string(size, '-') << endl;
     cout << rightBank << endl;
-    cout << string(SIZE, '-') << endl;
+    cout << string(size, '-') << endl;
 }
 
 void Controller::reset() {
@@ -69,7 +72,7 @@ void Controller::move(const Person *person, bool board) {
     Bank &bank = boat.bank() == &leftBank ? leftBank : rightBank;
 
     if (board) {
-        if (boat.hasSpace() && bank.contains(person)
+        if (bank.contains(person)
             && movePerson(person, bank, boat)) {
 
             display();
@@ -98,13 +101,17 @@ void Controller::unboard(const Person *person) {
 
 void Controller::moveBoat() {
 
-    nextTurn();
+    if(boat.personsCount() == 0) {
+        cout << "### il n'y a pas de passager" << endl;
+    } else {
+        nextTurn();
 
-    if (boat.canChangeBank()) {
-        Bank *bank = boat.bank() == &leftBank ? &rightBank : &leftBank;
-        boat.changeBank(bank);
+        if (boat.canChangeBank()) {
+            Bank *bank = boat.bank() == &leftBank ? &rightBank : &leftBank;
+            boat.changeBank(bank);
 
-        display();
+            display();
+        }
     }
 }
 
@@ -159,13 +166,13 @@ void Controller::processCommand(char command, const std::string &argument) {
         if (person != nullptr) {
             board(person);
         } else {
-            std::cout << "### Unknown person." << std::endl;
+            cout << "### personne inconnue" << endl;
         }
     } else if (command == UNBOARD) {
         if (person != nullptr) {
             unboard(person);
         } else {
-            std::cout << "### Unknown person." << std::endl;
+            cout << "### personne inconnue" << endl;
         }
     } else if (command == MOVE_BOAT) {
         moveBoat();
@@ -176,11 +183,13 @@ void Controller::processCommand(char command, const std::string &argument) {
         playing = false;
     } else if (command == MENU) {
         showMenu();
+    } else {
+        cout << "### entrée invalide" << endl;
     }
 
 }
 
-const Person *Controller::personNamed(const std::string &name) {
+const Person *Controller::personNamed(const string &name) {
     for (const Person *person : persons) {
         if (name.compare(person->name()) == 0) {
             return person;
@@ -193,13 +202,12 @@ bool Controller::checkConstraints(const Container &container, const Person* pers
 
     for (const Constraint *constraint : constraints) {
         if (!constraint->check(container,person)) {
-            cout << "### " << constraint->MESSAGE << endl;
+            cout << "### " << constraint->getMessage() << endl;
             return false;
         }
     }
     return true;
 }
-
 
 const size_t Controller::getBoatCapacity() {
     return BOAT_CAPACITY;

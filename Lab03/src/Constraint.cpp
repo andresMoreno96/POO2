@@ -5,11 +5,12 @@
  * Created on April 10, 2020
  */
 
+#include <algorithm>
 #include "Constraint.hpp"
 #include "Container.hpp"
 #include "Person.hpp"
 
-Constraint::Constraint(const std::string& message): MESSAGE(message) {}
+Constraint::Constraint(const std::string &message) : MESSAGE(message) {}
 
 std::list<const Person *> Constraint::createTemporaryList(const Container &container, const Person *person) const {
     std::list<const Person *> tmp;
@@ -25,36 +26,41 @@ std::list<const Person *> Constraint::createTemporaryList(const Container &conta
         tmp.push_back(person);
     }
 
+
     return tmp;
 }
 
+const std::string& Constraint::getMessage() const {
+    return MESSAGE;
+}
+
 ThiefConstraint::ThiefConstraint()
-: Constraint("voleur avec un membre de la famille sans le policier") {}
+        : Constraint("voleur avec un membre de la famille sans le policier") {}
 
-bool ThiefConstraint::check(const Container& container, const Person* person) const {
+bool ThiefConstraint::check(const Container &container, const Person *person) const {
 
-    std::list<const Person *> tmp= createTemporaryList(container,person);
+    std::list<const Person *> tmp = createTemporaryList(container, person);
 
-        return !(container.contains(tmp, [](const Person *p) {
-            return p->type() == THIEF;
-        }) && (container.contains(tmp, [](const Person *p) {
-            return p->type() == PARENT || p->type() == CHILD;
-        })) && !(container.contains(tmp, [](const Person *p) {
-            return p->type() == POLICEMAN;
-        })));
+    return !(container.contains(tmp, [](const Person *p) {
+        return p->hasRole("THIEF");
+    }) && (container.contains(tmp, [](const Person *p) {
+        return p->hasRole("PARENT") || p->hasRole("CHILD");
+    })) && !(container.contains(tmp, [](const Person *p) {
+        return p->hasRole("POLICEMAN");
+    })));
 
 
-    }
+}
 
 
 SonConstraint::SonConstraint() : Constraint("garcon avec sa mere sans son pere") {}
 
-bool SonConstraint::check(const Container& container, const Person* person) const {
+bool SonConstraint::check(const Container &container, const Person *person) const {
 
-    std::list<const Person *> tmp= createTemporaryList(container,person);
+    std::list<const Person *> tmp = createTemporaryList(container, person);
 
     for (auto it = tmp.begin(); it != tmp.end(); it++) {
-        if ((*it)->type() == CHILD && (*it)->sex() == MALE) {
+        if ((*it)->hasRole("CHILD") && (*it)->sex() == MALE) {
 
             const Child *son = (const Child *) *it;
 
@@ -77,15 +83,15 @@ bool SonConstraint::check(const Container& container, const Person* person) cons
 }
 
 DaughterConstraint::DaughterConstraint()
-: Constraint("fille avec son pere sans sa mere") {}
+        : Constraint("fille avec son pere sans sa mere") {}
 
-bool DaughterConstraint::check(const Container& container, const Person* person) const {
+bool DaughterConstraint::check(const Container &container, const Person *person) const {
 
 
-    std::list<const Person *> tmp= createTemporaryList(container,person);
+    std::list<const Person *> tmp = createTemporaryList(container, person);
 
     for (auto it = tmp.begin(); it != tmp.end(); it++) {
-        if ((*it)->type() == CHILD && (*it)->sex() == FEMALE) {
+        if ((*it)->hasRole("CHILD") && (*it)->sex() == FEMALE) {
 
             const Child *son = (const Child *) *it;
 

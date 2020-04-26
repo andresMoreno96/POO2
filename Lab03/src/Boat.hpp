@@ -1,8 +1,8 @@
 /* 
- * File:   Boat.h
- * Author: Nohan Budry, Andres Moreno
+ * File:   Boat.hpp
+ * Author: Andres Moreno, Simon Walther
  *
- * Created on May 9, 2019
+ * Created on April 10, 2020
  */
 
 #ifndef BOAT_H

@@ -35,8 +35,6 @@ private:
     const char QUIT = 'q';
     const char MENU = 'h';
 
-
-    
     bool playing = true;
     unsigned turn = 0;
     
@@ -53,8 +51,8 @@ public:
      * @param persons the list of persons
      * @param constraints the list of constraints
      */
-    Controller(const std::vector<const Person*> persons,
-               const std::vector<const Constraint*> constraints);
+    Controller(const std::vector<const Person*>& persons,
+               const std::vector<const Constraint*>& constraints);
     
     /**
      * Shows the possible commands a player can use.
