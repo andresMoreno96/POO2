@@ -2,13 +2,13 @@
 #define BUFFY_BUFFY_HPP
 
 #include <vector>
-#include "Person.hpp"
+#include "Humanoid.hpp"
 #include "Vampire.hpp"
 
-class Buffy : public Person {
+class Buffy : public Humanoid {
 
 public:
-    Buffy(const Manager& manager, const Cell& cell);
+    Buffy(const Field& field, const Cell& cell);
     void move();
 
 private:

@@ -1,12 +1,12 @@
 #ifndef BUFFY_VAMPIRE_HPP
 #define BUFFY_VAMPIRE_HPP
 
-#include "Person.hpp"
+#include "Humanoid.hpp"
 
-class Vampire : public Person {
+class Vampire : public Humanoid {
 
 public:
-    Vampire(const Manager& manager, const Cell& cell);
+    Vampire(const Field& field, const Cell& cell);
     void move();
 };
 

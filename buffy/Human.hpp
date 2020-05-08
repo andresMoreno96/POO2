@@ -1,12 +1,12 @@
 #ifndef BUFFY_HUMAN_HPP
 #define BUFFY_HUMAN_HPP
 
-#include "Person.hpp"
+#include "Humanoid.hpp"
 
-class Human : public Person {
+class Human : public Humanoid {
 
 public:
-    Human(const Manager& manager, const Cell& cell);
+    Human(const Field& field, const Cell& cell);
     void move();
 };
 

@@ -4,20 +4,20 @@
 #include <cstddef>
 #include <vector>
 #include <memory>
-#include "Person.hpp"
+#include "Humanoid.hpp"
 
-class Person;
+class Humanoid;
 
 class Cell {
     const size_t X;
     const size_t Y;
-    std::vector<const Person*> characters;
+    std::vector<const Humanoid*> humanoids;
 
 public:
     Cell(size_t x, size_t y);
-    void addCharacter(const Person& character);
-    void removeCharacter(const Person& character);
-    const std::vector<const Person*>& getCharacters() const;
+    void addCharacter(const Humanoid& character);
+    void removeCharacter(const Humanoid& character);
+    const std::vector<const Humanoid*>& getHumanoids() const;
     size_t getX() const;
     size_t getY() const;
 

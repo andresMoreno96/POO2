@@ -1,6 +1,6 @@
 #include "Human.hpp"
 
-Human::Human(const Manager& manager, const Cell& cell) : Person(manager, cell) {
+Human::Human(const Field& field, const Cell& cell) : Humanoid(field, cell) {
 
 }
 

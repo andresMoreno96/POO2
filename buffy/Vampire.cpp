@@ -1,6 +1,6 @@
 #include "Vampire.hpp"
 
-Vampire::Vampire(const Manager& manager, const Cell& cell) : Person(manager, cell) {
+Vampire::Vampire(const Field& field, const Cell& cell) : Humanoid(field, cell) {
 
 }
 
