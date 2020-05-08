@@ -36,3 +36,7 @@ void Humanoid::setAction(const Field& field) const {
 void Humanoid::executeAction(Field& field) {
     // TODO: implement this
 }
+
+const HumanoidType& Humanoid::getType() const {
+    return *type;
+}

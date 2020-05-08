@@ -12,4 +12,7 @@ public:
     const std::string& getType() const;
 };
 
+bool operator==(const HumanoidType& lhs, const HumanoidType& rhs);
+bool operator!=(const HumanoidType& lhs, const HumanoidType& rhs);
+
 #endif //BUFFY_HUMANOIDTYPE_HPP

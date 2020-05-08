@@ -1,7 +1,6 @@
 #ifndef BUFFY_FIELD_HPP
 #define BUFFY_FIELD_HPP
 
-#include <cstddef>
 #include <vector>
 #include <list>
 #include <memory>
@@ -23,7 +22,7 @@ public:
     Field(size_t width, size_t height);
     virtual ~Field();
     int nextTurn();
-    const Humanoid& neareastHumanoidFrom(const Humanoid& from, const HumanoidType& type);
+    const Humanoid* nearestFrom(const Humanoid& from, const HumanoidType& type);
 
 };
 

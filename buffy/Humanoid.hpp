@@ -25,6 +25,7 @@ public:
     bool isAlive() const;
     const Cell& getCell() const;
     const Field& getField() const;
+    const HumanoidType& getType() const;
     size_t getX() const;
     size_t getY() const;
 };

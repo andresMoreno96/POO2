@@ -3,6 +3,7 @@
 //
 
 #include "Field.hpp"
+#include <cmath>
 
 using namespace std;
 
@@ -35,4 +36,27 @@ Field::Field(size_t width, size_t height) {
 
 Field::~Field() {
     // TODO: implement this
+}
+
+const Humanoid* Field::nearestFrom(const Humanoid& from, const HumanoidType& type) {
+    size_t nearestDistance = -1; // -1 vas passer au max de size_t
+    const Humanoid* nearest = nullptr;
+
+    for(list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); ++it) {
+        if((*it)->getType() != type) {
+            continue;
+        }
+
+        int dx = from.getX() - (*it)->getX();
+        int dy = from.getY() - (*it)->getY();
+        size_t distance = abs(dx) + abs(dy);
+
+        if(distance < nearestDistance) {
+            nearestDistance = distance;
+            nearest = *it;
+        }
+    }
+
+    return nearest;
+
 }
