@@ -1,4 +1,7 @@
+#include <iostream>
 #include "Humanoid.hpp"
+
+using namespace std;
 
 size_t Humanoid::humanoidCounter = 0;
 
@@ -50,6 +53,10 @@ void Humanoid::setCell(Cell* cell) {
 
 size_t Humanoid::getId() const {
     return id;
+}
+
+void Humanoid::display() const {
+    cout << type->getRepresentation();
 }
 
 bool operator==(const Humanoid& lhs, const Humanoid& rhs) {

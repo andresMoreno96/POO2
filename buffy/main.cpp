@@ -2,7 +2,8 @@
 #include "Field.hpp"
 
 int main() {
-    Field field(50, 50, 10, 20);
+    Field field(10, 10, 4, 6);
+    field.display();
 
     return 0;
 }

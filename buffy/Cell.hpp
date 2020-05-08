@@ -5,10 +5,11 @@
 #include <list>
 #include <memory>
 #include "Humanoid.hpp"
+#include "Displayable.hpp"
 
 class Humanoid;
 
-class Cell {
+class Cell : public Displayable {
     const size_t X;
     const size_t Y;
     std::list<const Humanoid*> humanoids;
@@ -20,6 +21,7 @@ public:
     const std::list<const Humanoid*>& getHumanoids() const;
     size_t getX() const;
     size_t getY() const;
+    void display() const;
 
 };
 

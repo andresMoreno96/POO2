@@ -1,4 +1,7 @@
 #include "Cell.hpp"
+#include <iostream>
+
+using namespace std;
 
 Cell::Cell(size_t x, size_t y) : X(x), Y(y) {
 
@@ -22,4 +25,13 @@ size_t Cell::getX() const {
 
 size_t Cell::getY() const {
     return Y;
+}
+
+void Cell::display() const {
+    if(humanoids.size() > 0) {
+        // print first humanoid of list
+        humanoids.front()->display();
+    } else {
+        cout << ' ';
+    }
 }

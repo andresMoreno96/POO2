@@ -1,15 +1,15 @@
 #include "Field.hpp"
 #include <time.h>
+#include <iostream>
+#include <iomanip>
 
 using namespace std;
 
-const HumanoidType& Field::BUFFY   = HumanoidType("buffy");
-const HumanoidType& Field::HUMAN   = HumanoidType("human");
-const HumanoidType& Field::VAMPIRE = HumanoidType("vampire");
+const BuffyType& Field::BUFFY     = BuffyType();
+const VampireType& Field::VAMPIRE = VampireType();
+const HumanType& Field::HUMAN     = HumanType();
 
-Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) {
-    // TODO: implement this
-
+Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : width(width), height(height) {
     // Générer la grille
     for(size_t y = 0; y < height; ++y) {
         for(size_t x = 0; x < width; ++x) {
@@ -20,7 +20,7 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) {
     // Créer les humanoids
 
     // Créer Buffy
-    addHumanoid(BUFFY);
+    addHumanoid(BUFFY); // FIXME: buffy peut spawn au même endroit que d'autres humanoïdes
 
     // Créer les humains
     for(size_t human = 1; human < nbHumans; ++human) {
@@ -31,7 +31,6 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) {
     for(size_t vampire = 0; vampire < nbVampires; ++vampire) {
         addHumanoid(VAMPIRE);
     }
-
 }
 
 Field::~Field() {
@@ -122,4 +121,40 @@ void Field::moveHumanoid(Humanoid& humanoid, Cell& cell) {
     }
 
     humanoid.setCell(&cell);
+    cell.addHumanoid(humanoid);
+}
+
+void Field::display() const {
+    displayHorizontalBorder();
+
+    for(size_t y = 0; y < height; ++y) {
+        for(size_t x = 0; x < width; ++x) {
+            if(x == 0) {
+                cout << "| ";
+            }
+
+            cellAtPos(x, y)->display();
+            cout << ' ';
+
+            if(x == (width - 1)) {
+                cout << "|";
+            }
+        }
+
+        cout << endl;
+    }
+
+    displayHorizontalBorder();
+}
+
+void Field::displayHorizontalBorder() const {// Afficher barre horizontale
+    cout << setw(width * 2 + 2) << setfill('-') << left << "+" << "+" << endl;
+}
+
+Cell* Field::cellAtPos(size_t x, size_t y) const {
+    if(x < 0 || x >= width || y < 0 || y >= height) {
+        throw new out_of_range("This cell position is out of range.");
+    }
+
+    return cells.at(x + width * y);
 }
