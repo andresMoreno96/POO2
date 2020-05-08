@@ -5,11 +5,11 @@ Cell::Cell(size_t x, size_t y) : X(x), Y(y) {
 }
 
 void Cell::addHumanoid(const Humanoid& humanoid) {
-    // TODO: implement this
+    humanoids.push_back(&humanoid);
 }
 
 void Cell::removeHumanoid(const Humanoid& humanoid) {
-    // TODO: implement this
+    humanoids.remove(&humanoid);
 }
 
 const std::list<const Humanoid *>& Cell::getHumanoids() const {

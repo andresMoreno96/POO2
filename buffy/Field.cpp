@@ -3,11 +3,11 @@
 
 using namespace std;
 
-const HumanoidType& Field::buffy   = HumanoidType("buffy");
-const HumanoidType& Field::human   = HumanoidType("human");
-const HumanoidType& Field::vampire = HumanoidType("vampire");
+const HumanoidType& Field::BUFFY   = HumanoidType("buffy");
+const HumanoidType& Field::HUMAN   = HumanoidType("human");
+const HumanoidType& Field::VAMPIRE = HumanoidType("vampire");
 
-Field::Field(size_t width, size_t height, size_t nbHumans, size_t nbVampires) {
+Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) {
     // TODO: implement this
 
     // Générer la grille
@@ -20,18 +20,16 @@ Field::Field(size_t width, size_t height, size_t nbHumans, size_t nbVampires) {
     // Créer les humanoids
 
     // Créer Buffy
-    Cell* cell = randomCell();
-    humanoids.push_back(new Humanoid(*this, *cell, buffy));
-    // cell->addHumanoid();
+    addHumanoid(BUFFY);
 
     // Créer les humains
     for(size_t human = 1; human < nbHumans; ++human) {
-
+        addHumanoid(HUMAN);
     }
 
     // Créer les vampires
     for(size_t vampire = 0; vampire < nbVampires; ++vampire) {
-
+        addHumanoid(VAMPIRE);
     }
 
 }
@@ -42,6 +40,20 @@ Field::~Field() {
     for(size_t i = 0; i < cells.size(); ++i) {
         delete cells.at(i);
     }
+
+    // Delete humanoids
+    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); ++it) {
+        it = humanoids.erase(it); // suppression de l’élément dans la liste
+        delete *it;
+    }
+}
+
+void Field::addHumanoid(const HumanoidType& type) {
+    Cell* cell = randomCell();
+    Humanoid* humanoid = new Humanoid(*this, type);
+
+    humanoids.push_back(humanoid);
+    moveHumanoid(*humanoid, *cell);
 }
 
 int Field::nextTurn() {
@@ -100,4 +112,14 @@ Cell* Field::randomCell() const {
     }
 
     return cells.at((int)(rand() / (RAND_MAX + 1.0) * cells.size()));;
+}
+
+void Field::moveHumanoid(Humanoid& humanoid, Cell& cell) {
+    Cell* currentCell = humanoid.getCell();
+
+    if(currentCell != nullptr) {
+        currentCell->removeHumanoid(humanoid);
+    }
+
+    humanoid.setCell(&cell);
 }

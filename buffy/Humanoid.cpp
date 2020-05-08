@@ -1,7 +1,10 @@
 #include "Humanoid.hpp"
 
-Humanoid::Humanoid(const Field& field, const Cell& cell, const HumanoidType& type)
-: field(&field), cell(&cell), action(nullptr), type(&type), alive(true) {
+size_t Humanoid::humanoidCounter = 0;
+
+Humanoid::Humanoid(const Field& field, const HumanoidType& type)
+: field(&field), action(nullptr), type(&type), alive(true),
+  id(humanoidCounter++) {
 
 }
 
@@ -9,12 +12,12 @@ Humanoid::~Humanoid() {
 
 }
 
-const Cell& Humanoid::getCell() const {
-    return *cell;
+Cell* Humanoid::getCell() const {
+    return cell;
 }
 
-const Field& Humanoid::getField() const {
-    return *field;
+const Field* Humanoid::getField() const {
+    return field;
 }
 
 size_t Humanoid::getX() const {
@@ -39,4 +42,20 @@ void Humanoid::executeAction(Field& field) {
 
 const HumanoidType& Humanoid::getType() const {
     return *type;
+}
+
+void Humanoid::setCell(Cell* cell) {
+    this->cell = cell;
+}
+
+size_t Humanoid::getId() const {
+    return id;
+}
+
+bool operator==(const Humanoid& lhs, const Humanoid& rhs) {
+    return lhs.getId() == rhs.getId();
+}
+
+bool operator!=(const Humanoid& lhs, const Humanoid& rhs) {
+    return !(lhs == rhs);
 }

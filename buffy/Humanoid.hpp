@@ -11,23 +11,30 @@ class Field;
 class Action;
 
 class Humanoid {
+    static size_t humanoidCounter;
+    size_t id;
     const Field* field;
-    const Cell* cell;
     const Action* action;
     const HumanoidType* type;
+    Cell* cell;
     bool alive;
 
 public:
-    Humanoid(const Field& field, const Cell& cell, const HumanoidType& type);
+    Humanoid(const Field& field, const HumanoidType& type);
     virtual ~Humanoid();
     void setAction(const Field& field) const;
     void executeAction(Field& field);
     bool isAlive() const;
-    const Cell& getCell() const;
-    const Field& getField() const;
+    Cell* getCell() const;
+    void setCell(Cell* cell);
+    const Field* getField() const;
     const HumanoidType& getType() const;
     size_t getX() const;
     size_t getY() const;
+    size_t getId() const;
 };
+
+bool operator==(const Humanoid& lhs, const Humanoid& rhs);
+bool operator!=(const Humanoid& lhs, const Humanoid& rhs);
 
 #endif //BUFFY_HUMANOID_HPP
