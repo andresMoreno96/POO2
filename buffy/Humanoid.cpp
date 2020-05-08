@@ -1,6 +1,7 @@
 #include "Humanoid.hpp"
 
-Humanoid::Humanoid(const Field& field, const Cell& cell) : field(field), cell(cell), action(nullptr), alive(true) {
+Humanoid::Humanoid(const Field& field, const Cell& cell, const HumanoidType& type)
+: field(&field), cell(&cell), action(nullptr), type(&type), alive(true) {
 
 }
 
@@ -9,19 +10,19 @@ Humanoid::~Humanoid() {
 }
 
 const Cell& Humanoid::getCell() const {
-    return cell;
+    return *cell;
 }
 
 const Field& Humanoid::getField() const {
-    return field;
+    return *field;
 }
 
 size_t Humanoid::getX() const {
-    return cell.getX();
+    return cell->getX();
 }
 
 size_t Humanoid::getY() const {
-    return cell.getY();
+    return cell->getY();
 }
 
 bool Humanoid::isAlive() const {

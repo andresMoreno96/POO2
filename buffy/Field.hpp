@@ -6,6 +6,8 @@
 #include <list>
 #include <memory>
 #include "Cell.hpp"
+#include "Humanoid.hpp"
+#include "HumanoidType.hpp"
 
 class Cell;
 class Humanoid;
@@ -21,6 +23,8 @@ public:
     Field(size_t width, size_t height);
     virtual ~Field();
     int nextTurn();
+    const Humanoid& neareastHumanoidFrom(const Humanoid& from, const HumanoidType& type);
+
 };
 
 #endif //BUFFY_FIELD_HPP
