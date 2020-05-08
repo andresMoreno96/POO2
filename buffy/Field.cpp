@@ -1,11 +1,48 @@
-//
-// Created by simon on 07.05.20.
-//
-
 #include "Field.hpp"
-#include <cmath>
+#include <time.h>
 
 using namespace std;
+
+const HumanoidType& Field::buffy   = HumanoidType("buffy");
+const HumanoidType& Field::human   = HumanoidType("human");
+const HumanoidType& Field::vampire = HumanoidType("vampire");
+
+Field::Field(size_t width, size_t height, size_t nbHumans, size_t nbVampires) {
+    // TODO: implement this
+
+    // Générer la grille
+    for(size_t y = 0; y < height; ++y) {
+        for(size_t x = 0; x < width; ++x) {
+            cells.push_back(new Cell(x, y));
+        }
+    }
+
+    // Créer les humanoids
+
+    // Créer Buffy
+    Cell* cell = randomCell();
+    humanoids.push_back(new Humanoid(*this, *cell, buffy));
+    // cell->addHumanoid();
+
+    // Créer les humains
+    for(size_t human = 1; human < nbHumans; ++human) {
+
+    }
+
+    // Créer les vampires
+    for(size_t vampire = 0; vampire < nbVampires; ++vampire) {
+
+    }
+
+}
+
+Field::~Field() {
+    // TODO: implement this
+
+    for(size_t i = 0; i < cells.size(); ++i) {
+        delete cells.at(i);
+    }
+}
 
 int Field::nextTurn() {
     // NOTE: ne pas changer cette méthode, elle est tirée de la donnée !
@@ -30,14 +67,6 @@ int Field::nextTurn() {
     return turn++;
 }
 
-Field::Field(size_t width, size_t height) {
-    // TODO: implement this
-}
-
-Field::~Field() {
-    // TODO: implement this
-}
-
 const Humanoid* Field::nearestFrom(const Humanoid& from, const HumanoidType& type) {
     size_t nearestDistance = -1; // -1 vas passer au max de size_t
     const Humanoid* nearest = nullptr;
@@ -59,4 +88,16 @@ const Humanoid* Field::nearestFrom(const Humanoid& from, const HumanoidType& typ
 
     return nearest;
 
+}
+
+Cell* Field::randomCell() const {
+    // FIXME: use c++ random library instead ???
+    static bool seeded = false;
+
+    if(!seeded) {
+        srand(time(NULL));
+        seeded = true;
+    }
+
+    return cells.at((int)(rand() / (RAND_MAX + 1.0) * cells.size()));;
 }

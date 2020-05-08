@@ -12,6 +12,10 @@ class Cell;
 class Humanoid;
 
 class Field {
+    static const HumanoidType& buffy;
+    static const HumanoidType& human;
+    static const HumanoidType& vampire;
+
     size_t turn;
     size_t width;
     size_t height;
@@ -19,11 +23,12 @@ class Field {
     std::list<Humanoid*> humanoids;
 
 public:
-    Field(size_t width, size_t height);
+    Field(size_t width, size_t height, size_t nbHumans, size_t nbVampires);
     virtual ~Field();
     int nextTurn();
     const Humanoid* nearestFrom(const Humanoid& from, const HumanoidType& type);
-
+private:
+    Cell* randomCell() const;
 };
 
 #endif //BUFFY_FIELD_HPP

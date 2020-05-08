@@ -4,15 +4,15 @@ Cell::Cell(size_t x, size_t y) : X(x), Y(y) {
 
 }
 
-void Cell::addCharacter(const Humanoid& character) {
+void Cell::addHumanoid(const Humanoid& humanoid) {
     // TODO: implement this
 }
 
-void Cell::removeCharacter(const Humanoid& character) {
+void Cell::removeHumanoid(const Humanoid& humanoid) {
     // TODO: implement this
 }
 
-const std::vector<const Humanoid *>& Cell::getHumanoids() const {
+const std::list<const Humanoid *>& Cell::getHumanoids() const {
     return humanoids;
 }
 
