@@ -53,6 +53,7 @@ private:
     double calculateStats()const;
     void processCommand(char command);
 
+    void createGrid(size_t width, size_t height);
 };
 
 #endif //BUFFY_FIELD_HPP

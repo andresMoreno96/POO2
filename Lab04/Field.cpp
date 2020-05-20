@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <random>
+#include <vector>
 
 using namespace std;
 
@@ -17,11 +18,7 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
                                                                                 nbVampires(nbVampires),
                                                                                 nbHumans(nbHumans) {
     // Générer la grille
-    for (size_t y = 0; y < height; ++y) {
-        for (size_t x = 0; x < width; ++x) {
-            cells.push_back(new Cell(x, y));
-        }
-    }
+    createGrid(width, height);
 
     //for random placement
     std::random_device rd;
@@ -55,6 +52,15 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
         moveHumanoid(*it, *randomCell(distribution(rd)));
     }
 
+}
+
+
+void Field::createGrid(size_t width, size_t height) {
+    for (size_t y = 0; y < height; ++y) {
+        for (size_t x = 0; x < width; ++x) {
+            cells.push_back(new Cell(x, y));
+        }
+    }
 }
 
 
@@ -170,10 +176,28 @@ void Field::processCommand(char command) {
 
 void Field::play() {
 
- display(); //might need to change
     string input;
+    bool displayGrid=false;
+    cout<< "Want to display the gird? (y/n)"<<endl;
+
+    getline(cin, input, '\n');
+
+    //FIXME:check invalid input
+    if (input.size() > 0) {
+        char command = input[0];
+        if(command=='y'){
+            displayGrid= true;
+        }
+    }
     cout << endl;
+
+    input="";
     while (playing) {
+
+        if(displayGrid){
+            display();
+        }
+
         cout << "[" << turn << "]" << " q)quit s)statistics n)nextTurn: ";
 
         getline(cin, input, '\n');
