@@ -30,8 +30,8 @@ public:
     void setCell(Cell* cell);
     const HumanoidType& getType() const;
     void display() const;
-    size_t getX() const;
-    size_t getY() const;
+    int getX() const;
+    int getY() const;
     virtual void setNewPosition()=0;
 
 };

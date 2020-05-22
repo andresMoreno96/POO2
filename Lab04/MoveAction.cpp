@@ -4,10 +4,7 @@
 
 #include "MoveAction.hpp"
 
-MoveAction::MoveAction(Humanoid& humanoid) : Action(humanoid) {
+MoveAction::MoveAction(Humanoid* humanoid) : Action(humanoid) {
 
 }
 
-void MoveAction::execute(Field& f) {
-    // TODO: implement this
-}

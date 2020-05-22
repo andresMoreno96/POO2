@@ -6,7 +6,7 @@
 class VampireAttackAction : public Action {
 
 public:
-    VampireAttackAction(Humanoid& humanoid);
+    VampireAttackAction(Humanoid* humanoid);
     void execute(Field& f);
 };
 

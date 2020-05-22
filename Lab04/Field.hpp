@@ -20,10 +20,6 @@ class Field {
 
     bool playing = true;
 
-    static const BuffyType& BUFFY;
-    static const HumanType& HUMAN;
-    static const VampireType& VAMPIRE;
-
     size_t turn =0;
     size_t width;
     size_t height;
@@ -34,12 +30,15 @@ class Field {
     std::list<Humanoid*> humanoids;
 
 public:
+    static const BuffyType& BUFFY;
+    static const HumanType& HUMAN;
+    static const VampireType& VAMPIRE;
+
     Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans);
     int nextTurn();
-    const Humanoid* nearestFrom(const Humanoid& from, const HumanoidType& type);
-    void moveHumanoid(Humanoid& humanoid, Cell& cell);
+    const Humanoid* nearestFrom(const Humanoid *from, const HumanoidType *type);
+    bool moveHumanoid(Humanoid& humanoid, int coordX, int coordY);
     void display() const;
-    Cell* cellAtPos(size_t x, size_t y) const;
     size_t getWidth() const;
     size_t getHeight() const;
     bool hasVampireLeft() const;
@@ -48,11 +47,13 @@ public:
     virtual ~Field();
 
 private:
+    Cell* cellAtPos(size_t x, size_t y) const;
+    bool checkBounds(size_t x, size_t y) const;
+    void moveHumanoid(Humanoid& humanoid, Cell *cell);
     Cell* randomCell(int random) const;
     void displayHorizontalBorder() const;
     double calculateStats()const;
     void processCommand(char command);
-
     void createGrid(size_t width, size_t height);
 };
 

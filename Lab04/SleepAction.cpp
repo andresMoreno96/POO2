@@ -4,7 +4,7 @@
 
 #include "SleepAction.hpp"
 
-SleepAction::SleepAction(Humanoid& humanoid) : Action(humanoid) {
+SleepAction::SleepAction(Humanoid* humanoid) : Action(humanoid) {
 
 }
 

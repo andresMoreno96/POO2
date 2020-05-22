@@ -1,6 +1,6 @@
 #include "VampireAttackAction.hpp"
 
-VampireAttackAction::VampireAttackAction(Humanoid& humanoid) : Action(humanoid) {
+VampireAttackAction::VampireAttackAction(Humanoid* humanoid) : Action(humanoid) {
 
 }
 

@@ -6,7 +6,7 @@
 class BuffyAttackAction : public Action {
 
 public:
-    BuffyAttackAction(Humanoid& humanoid);
+    BuffyAttackAction(Humanoid* humanoid);
     void execute(Field& f);
 };
 

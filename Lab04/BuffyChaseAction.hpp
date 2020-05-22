@@ -6,7 +6,12 @@
 class BuffyChaseAction : public MoveAction {
 
 public:
-    BuffyChaseAction()
+
+
+    BuffyChaseAction(Humanoid* humanoid);
+
+    void execute(Field &f) override;
+
 };
 
 

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Cell::Cell(size_t x, size_t y) : X(x), Y(y) {
+Cell::Cell(int x, int y) : X(x), Y(y) {
 
 }
 
@@ -19,11 +19,11 @@ const std::list<const Humanoid *>& Cell::getHumanoids() const {
     return humanoids;
 }
 
-size_t Cell::getX() const {
+int Cell::getX() const {
     return X;
 }
 
-size_t Cell::getY() const {
+int Cell::getY() const {
     return Y;
 }
 

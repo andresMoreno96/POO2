@@ -17,6 +17,10 @@ HumanoidType::HumanoidType(const string& type, char representation) : type(type)
 
 }
 
+HumanoidType::HumanoidType(const HumanoidType &humType):representation(humType.representation),type(humType.type) {
+
+}
+
 const std::string& HumanoidType::getType() const {
     return type;
 }
@@ -25,15 +29,15 @@ char HumanoidType::getRepresentation() const {
     return representation;
 }
 
-BuffyType::BuffyType() : HumanoidType(BuffyType::type, BuffyType::representation) {
+BuffyType::BuffyType() : HumanoidType("buffy", BuffyType::representation) {
 
 }
 
-VampireType::VampireType() : HumanoidType(VampireType::type, VampireType::representation) {
+VampireType::VampireType() : HumanoidType("vampire", VampireType::representation) {
 
 }
 
-HumanType::HumanType() : HumanoidType(HumanType::type, HumanType::representation) {
+HumanType::HumanType() : HumanoidType("human", HumanType::representation) {
 
 }
 

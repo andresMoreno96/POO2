@@ -1,6 +1,6 @@
 #include "BuffyAttackAction.hpp"
 
-BuffyAttackAction::BuffyAttackAction(Humanoid& humanoid) : Action(humanoid) {
+BuffyAttackAction::BuffyAttackAction(Humanoid *humanoid) : Action(humanoid) {
 
 }
 

@@ -8,9 +8,11 @@ class Field;
 class Humanoid;
 
 class Action {
-    Humanoid& humanoid;
+
+protected:
+    Humanoid* humanoid;
 public:
-    Action(Humanoid& humanoid);
+    Action(Humanoid* humanoid);
     virtual void execute(Field& f) = 0;
     virtual ~Action();
 };

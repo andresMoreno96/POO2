@@ -6,7 +6,7 @@
 class SleepAction : public Action {
 
 public:
-    SleepAction(Humanoid& humanoid);
+    SleepAction(Humanoid* humanoid);
     void execute(Field& f);
 };
 

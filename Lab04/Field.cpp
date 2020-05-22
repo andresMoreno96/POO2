@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <random>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
     // Créer Buffy
     Buffy *buffy = new Buffy(BUFFY);
     humanoids.push_back(buffy);
-    moveHumanoid(*buffy, *randomCell(distribution(rd)));
+    moveHumanoid(*buffy, randomCell(distribution(rd)));
 
     // Créer les humains
     vector<Human *> humans;
@@ -37,7 +38,7 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
     }
     for (auto &it: humans) {
         humanoids.push_back(it);
-        moveHumanoid(*it, *randomCell(distribution(rd)));
+        moveHumanoid(*it, randomCell(distribution(rd)));
     }
 
     // Créer les vampires
@@ -48,7 +49,7 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
 
     for (auto &it: vampires) {
         humanoids.push_back(it);
-        moveHumanoid(*it, *randomCell(distribution(rd)));
+        moveHumanoid(*it, randomCell(distribution(rd)));
     }
 
 }
@@ -86,18 +87,24 @@ int Field::nextTurn() {
     return turn++;
 }
 
-const Humanoid *Field::nearestFrom(const Humanoid &from, const HumanoidType &type) {
-    size_t nearestDistance = -1; // -1 vas passer au max de size_t
+const Humanoid *Field::nearestFrom(const Humanoid *from, const HumanoidType *type) {
+    double nearestDistance = numeric_limits<double>::max();
     const Humanoid *nearest = nullptr;
 
     for (auto it = humanoids.begin(); it != humanoids.end(); ++it) {
-        if ((*it)->getType() != type) {
+        if ((*it)->getType() != *type) {
             continue;
         }
 
-        int dx = from.getX() - (*it)->getX();
-        int dy = from.getY() - (*it)->getY();
-        size_t distance = abs(dx) + abs(dy);
+ // BV -> OV-OB
+        int dx= (*it)->getX() - from->getX();
+        int dy= (*it)->getY() - from->getY();
+
+        double distance = abs(sqrt(pow(dx,2)+pow(dy,2)));
+
+//        int dx = from.getX() - (*it)->getX();
+//        int dy = from.getY() - (*it)->getY();
+//        size_t distance = abs(dx) + abs(dy);
 
         if (distance < nearestDistance) {
             nearestDistance = distance;
@@ -113,15 +120,27 @@ Cell *Field::randomCell(int random) const {
     return cells.at(random);
 }
 
-void Field::moveHumanoid(Humanoid &humanoid, Cell &cell) {
+bool Field::moveHumanoid(Humanoid &humanoid, int coordX, int coordY) {
+
+    if (!checkBounds(coordX, coordY)) {
+        return false;
+    }
+
+    moveHumanoid(humanoid, cellAtPos(coordX, coordY));
+    return true;
+
+}
+
+void Field::moveHumanoid(Humanoid &humanoid, Cell *cell) {
+
     Cell *currentCell = humanoid.getCell();
 
     if (currentCell != nullptr) {
         currentCell->removeHumanoid(humanoid);
     }
 
-    humanoid.setCell(&cell);
-    cell.addHumanoid(humanoid);
+    humanoid.setCell(cell);
+    cell->addHumanoid(humanoid);
 }
 
 void Field::display() const {
@@ -150,11 +169,11 @@ void Field::displayHorizontalBorder() const {// Afficher barre horizontale
     cout << setw(width * 2 + 2) << setfill('-') << left << "+" << "+" << endl;
 }
 
-Cell *Field::cellAtPos(size_t x, size_t y) const {
-    if (x < 0 || x >= width || y < 0 || y >= height) {
-        throw new out_of_range("This cell position is out of range.");
-    }
+bool Field::checkBounds(size_t x, size_t y) const {
+    return (x < width && y < height);
+}
 
+Cell *Field::cellAtPos(size_t x, size_t y) const {
     return cells.at(x + width * y);
 }
 

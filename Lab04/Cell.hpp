@@ -9,17 +9,17 @@
 class Humanoid;
 
 class Cell {
-    const size_t X;
-    const size_t Y;
+    const int X;
+    const int Y;
     std::list<const Humanoid*> humanoids;
 
 public:
-    Cell(size_t x, size_t y);
+    Cell(int x, int y);
     void addHumanoid(const Humanoid& humanoid);
     void removeHumanoid(const Humanoid& humanoid);
     const std::list<const Humanoid*>& getHumanoids() const;
-    size_t getX() const;
-    size_t getY() const;
+    int getX() const;
+    int getY() const;
     void display() const;
 
 };

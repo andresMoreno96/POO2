@@ -5,6 +5,10 @@
 
 class VampireChaseAction : public MoveAction {
 
+public:
+    VampireChaseAction(Humanoid* humanoid);
+
+    void execute(Field &f) override;
 };
 
 #endif //BUFFY_VAMPIRECHASEACTION_HPP

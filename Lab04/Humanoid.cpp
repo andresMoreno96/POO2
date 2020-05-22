@@ -4,7 +4,7 @@
 using namespace std;
 
 Humanoid::Humanoid(const HumanoidType& type)
-: action(nullptr), type(&type), alive(true) {
+: action(nullptr), type(&type), alive(true),cell(nullptr) {
 
 }
 
@@ -17,11 +17,11 @@ Cell* Humanoid::getCell() const {
 }
 
 
-size_t Humanoid::getX() const {
+int Humanoid::getX() const {
     return cell->getX();
 }
 
-size_t Humanoid::getY() const {
+int Humanoid::getY() const {
     return cell->getY();
 }
 

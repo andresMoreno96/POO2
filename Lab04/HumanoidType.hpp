@@ -9,6 +9,7 @@ class HumanoidType {
 
 public:
     HumanoidType(const std::string& type, const char representation);
+    HumanoidType(const HumanoidType& humType);
     const std::string& getType() const;
     char getRepresentation() const;
 };
@@ -17,6 +18,7 @@ class BuffyType : public HumanoidType {
     static const std::string type;
     static const char representation;
 public:
+
     BuffyType();
 };
 
