@@ -6,19 +6,23 @@
 
 Buffy::Buffy(const HumanoidType &type) : Humanoid(type) {}
 
-void Buffy::setAction(const Field& field) {
+void Buffy::setAction(const Field &field) {
     // Attaque le vampire le plus proche s'il en reste
     // autrement, se déplace aléatoirement
-    if(field.hasVampireLeft()) {
-        action = std::make_unique<BuffyChaseAction>(this);
+    if (field.hasVampireLeft()) {
+        Humanoid *vam = field.nearestFrom(this, &Field::VAMPIRE);
+
+        if (field.getDistance(this, vam) < 2) {
+            action = std::make_unique<BuffyAttackAction>(this, vam);
+        } else {
+            action = std::make_unique<BuffyChaseAction>(this, vam);
+        }
+
     } else {
         action = std::make_unique<RandomMoveAction>(this);
     }
 }
 
-void Buffy::setNewPosition() {
-
-}
 
 Buffy::~Buffy() {
 

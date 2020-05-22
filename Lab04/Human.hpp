@@ -11,7 +11,6 @@ public:
     void setAction(const Field &field) override;
     virtual ~Human();
 
-    void setNewPosition() override;
 };
 
 

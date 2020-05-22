@@ -5,10 +5,13 @@
 
 class BuffyChaseAction : public MoveAction {
 
+private:
+    const Humanoid* target;
+
 public:
 
 
-    BuffyChaseAction(Humanoid* humanoid);
+    BuffyChaseAction(Humanoid* humanoid, const Humanoid* target);
 
     void execute(Field &f) override;
 

@@ -4,9 +4,11 @@
 #include "Action.hpp"
 
 class BuffyAttackAction : public Action {
+private:
+    Humanoid *target;
 
 public:
-    BuffyAttackAction(Humanoid* humanoid);
+    BuffyAttackAction(Humanoid* humanoid, Humanoid* target);
     void execute(Field& f);
 };
 

@@ -11,7 +11,7 @@ public:
     void setAction(const Field &field) override;
     virtual ~Vampire();
 
-    void setNewPosition() override;
+
 };
 
 

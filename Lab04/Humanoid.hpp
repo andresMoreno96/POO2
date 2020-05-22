@@ -14,7 +14,6 @@ class Action;
 class Humanoid {
     const HumanoidType* type;
     Cell* cell;
-    Cell* nextPos;
     bool alive;
 
 protected:
@@ -26,13 +25,13 @@ public:
     virtual void setAction(const Field& field) = 0;
     void executeAction(Field& field);
     bool isAlive() const;
+    void setAlive(bool alive);
     Cell* getCell() const;
     void setCell(Cell* cell);
     const HumanoidType& getType() const;
     void display() const;
     int getX() const;
     int getY() const;
-    virtual void setNewPosition()=0;
 
 };
 

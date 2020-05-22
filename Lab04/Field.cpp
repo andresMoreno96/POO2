@@ -87,24 +87,30 @@ int Field::nextTurn() {
     return turn++;
 }
 
-const Humanoid *Field::nearestFrom(const Humanoid *from, const HumanoidType *type) {
+double Field::getDistance(const Humanoid *from, const Humanoid* target) const {
+    int dx= target->getX() - from->getX();
+    int dy= target->getY() - from->getY();
+
+    return abs(sqrt(pow(dx,2)+pow(dy,2)));
+
+}
+
+Humanoid * Field::nearestFrom(const Humanoid *from, const HumanoidType *type) const {
     double nearestDistance = numeric_limits<double>::max();
-    const Humanoid *nearest = nullptr;
+    Humanoid *nearest = nullptr;
 
     for (auto it = humanoids.begin(); it != humanoids.end(); ++it) {
         if ((*it)->getType() != *type) {
             continue;
         }
 
- // BV -> OV-OB
-        int dx= (*it)->getX() - from->getX();
-        int dy= (*it)->getY() - from->getY();
+        // BV -> OV-OB
 
-        double distance = abs(sqrt(pow(dx,2)+pow(dy,2)));
-
-//        int dx = from.getX() - (*it)->getX();
-//        int dy = from.getY() - (*it)->getY();
-//        size_t distance = abs(dx) + abs(dy);
+        double distance = getDistance(from, *it);
+//        int dx= (*it)->getX() - from->getX();
+//        int dy= (*it)->getY() - from->getY();
+//
+//        double distance = abs(sqrt(pow(dx,2)+pow(dy,2)));
 
         if (distance < nearestDistance) {
             nearestDistance = distance;
@@ -259,5 +265,21 @@ bool Field::hasVampireLeft() const {
 
 bool Field::hasHumanLeft() const {
     return nbHumans > 0;
+}
+
+void Field::setNbHumans(size_t _nbHumans) {
+    nbHumans = _nbHumans;
+}
+
+void Field::setNbVampires(size_t _nbVampires) {
+    nbVampires = _nbVampires;
+}
+
+size_t Field::getNbHumans() const {
+    return nbHumans;
+}
+
+size_t Field::getNbVampires() const {
+    return nbVampires;
 }
 

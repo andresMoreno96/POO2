@@ -9,9 +9,6 @@ void Human::setAction(const Field &field) {
     action = std::make_unique<RandomMoveAction>(this);
 }
 
-void Human::setNewPosition() {
-
-}
 
 Human::~Human() {
 

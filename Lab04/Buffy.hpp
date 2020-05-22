@@ -11,7 +11,7 @@ public:
     void setAction(const Field &field) override;
     virtual ~Buffy();
 
-    void setNewPosition() override;
+
 };
 
 

@@ -36,13 +36,23 @@ public:
 
     Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans);
     int nextTurn();
-    const Humanoid* nearestFrom(const Humanoid *from, const HumanoidType *type);
+    Humanoid * nearestFrom(const Humanoid *from, const HumanoidType *type) const;
     bool moveHumanoid(Humanoid& humanoid, int coordX, int coordY);
     void display() const;
     size_t getWidth() const;
     size_t getHeight() const;
+
+    void setNbHumans(size_t _nbHumans);
+
+    void setNbVampires(size_t _nbVampires);
+
+    size_t getNbHumans() const;
+
+    size_t getNbVampires() const;
+
     bool hasVampireLeft() const;
     bool hasHumanLeft() const;
+    double getDistance(const Humanoid *from, const Humanoid* target) const;
     void play();
     virtual ~Field();
 

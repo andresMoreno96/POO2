@@ -16,10 +16,6 @@ void Vampire::setAction(const Field &field)  {
     }
 }
 
-void Vampire::setNewPosition() {
-
-}
-
 Vampire::~Vampire() {
 
 }

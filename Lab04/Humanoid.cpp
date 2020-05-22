@@ -37,10 +37,6 @@ void Humanoid::setCell(Cell* cell) {
     this->cell = cell;
 }
 
-//size_t Humanoid::getId() const {
-//    return id;
-//}
-
 void Humanoid::display() const {
     cout << type->getRepresentation();
 }
@@ -51,11 +47,7 @@ void Humanoid::executeAction(Field& field) {
     }
 }
 
-//
-//bool operator==(const Humanoid& lhs, const Humanoid& rhs) {
-//    return lhs.getId() == rhs.getId();
-//}
-//
-//bool operator!=(const Humanoid& lhs, const Humanoid& rhs) {
-//    return !(lhs == rhs);
-//}
+void Humanoid::setAlive(bool alive) {
+    Humanoid::alive = alive;
+}
+
