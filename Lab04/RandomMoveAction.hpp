@@ -1,13 +1,10 @@
 #ifndef BUFFY_RANDOMMOVEACTION_HPP
 #define BUFFY_RANDOMMOVEACTION_HPP
 
-#include "Action.hpp"
+#include "MoveAction.hpp"
 
-class RandomMoveAction : public Action {
+class RandomMoveAction : public MoveAction {
 
-public:
-    RandomMoveAction(Humanoid& humanoid);
-    void execute(Field& f);
 };
 
 #endif //BUFFY_RANDOMMOVEACTION_HPP

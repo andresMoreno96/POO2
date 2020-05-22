@@ -13,10 +13,12 @@ class Action;
 
 class Humanoid {
     const HumanoidType* type;
-    std::unique_ptr<Action> action;
     Cell* cell;
     Cell* nextPos;
     bool alive;
+
+protected:
+    std::unique_ptr<Action> action;
 
 public:
     Humanoid(const HumanoidType& type);
@@ -28,7 +30,6 @@ public:
     void setCell(Cell* cell);
     const HumanoidType& getType() const;
     void display() const;
-    void setAction(std::unique_ptr<Action> action);
     size_t getX() const;
     size_t getY() const;
     virtual void setNewPosition()=0;

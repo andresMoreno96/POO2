@@ -45,10 +45,6 @@ void Humanoid::display() const {
     cout << type->getRepresentation();
 }
 
-void Humanoid::setAction(std::unique_ptr<Action> action) {
-    this->action = move(action);
-}
-
 void Humanoid::executeAction(Field& field) {
     if(action != nullptr) {
         action->execute(field);
