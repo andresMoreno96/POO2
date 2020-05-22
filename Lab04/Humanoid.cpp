@@ -50,7 +50,9 @@ void Humanoid::setAction(std::unique_ptr<Action> action) {
 }
 
 void Humanoid::executeAction(Field& field) {
-    action->execute(field);
+    if(action != nullptr) {
+        action->execute(field);
+    }
 }
 
 //
