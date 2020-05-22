@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Humanoid::Humanoid(const Field& field, const HumanoidType& type)
-: field(&field), action(nullptr), type(&type), alive(true) {
+Humanoid::Humanoid(const HumanoidType& type)
+: action(nullptr), type(&type), alive(true) {
 
 }
 
@@ -44,6 +44,15 @@ void Humanoid::setCell(Cell* cell) {
 void Humanoid::display() const {
     cout << type->getRepresentation();
 }
+
+void Humanoid::setAction(std::unique_ptr<Action> action) {
+    this->action = move(action);
+}
+
+void Humanoid::executeAction(Field& field) {
+    action->execute(field);
+}
+
 //
 //bool operator==(const Humanoid& lhs, const Humanoid& rhs) {
 //    return lhs.getId() == rhs.getId();

@@ -20,7 +20,6 @@ class Field {
 
     bool playing = true;
 
-
     static const BuffyType& BUFFY;
     static const HumanType& HUMAN;
     static const VampireType& VAMPIRE;
@@ -35,7 +34,6 @@ class Field {
     std::list<Humanoid*> humanoids;
 
 public:
-
     Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans);
     int nextTurn();
     const Humanoid* nearestFrom(const Humanoid& from, const HumanoidType& type);
@@ -44,6 +42,8 @@ public:
     Cell* cellAtPos(size_t x, size_t y) const;
     size_t getWidth() const;
     size_t getHeight() const;
+    bool hasVampireLeft() const;
+    bool hasHumanLeft() const;
     void play();
     virtual ~Field();
 

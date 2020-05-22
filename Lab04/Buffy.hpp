@@ -10,14 +10,10 @@
 
 class Buffy: public Humanoid {
 
-
 public:
-    Buffy(const Field &field, const HumanoidType &type);
-
+    Buffy(const HumanoidType &type);
+    using Humanoid::setAction;
     void setAction(const Field &field) override;
-
-    void executeAction(Field &field) override;
-
     virtual ~Buffy();
 
     void setNewPosition() override;

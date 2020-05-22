@@ -11,16 +11,12 @@
 class Vampire: public Humanoid {
 
 public:
-    Vampire(const Field &field, const HumanoidType &type);
-
+    Vampire(const HumanoidType &type);
+    using Humanoid::setAction;
     void setAction(const Field &field) override;
-
-    void executeAction(Field &field) override;
-
     virtual ~Vampire();
 
     void setNewPosition() override;
-
 };
 
 

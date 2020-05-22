@@ -11,16 +11,12 @@
 class Human: public Humanoid {
 
 public:
-    Human(const Field &field, const HumanoidType &type);
-
+    Human(const HumanoidType &type);
+    using Humanoid::setAction;
     void setAction(const Field &field) override;
-
-    void executeAction(Field &field) override;
-
     virtual ~Human();
 
     void setNewPosition() override;
-
 };
 
 

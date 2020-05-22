@@ -13,7 +13,6 @@ const BuffyType &Field::BUFFY = BuffyType();
 const VampireType &Field::VAMPIRE = VampireType();
 const HumanType &Field::HUMAN = HumanType();
 
-
 Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : width(width), height(height),
                                                                                 nbVampires(nbVampires),
                                                                                 nbHumans(nbHumans) {
@@ -27,14 +26,14 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
     // Créer les humanoids
 
     // Créer Buffy
-    Buffy *buffy = new Buffy(*this, BUFFY);
+    Buffy *buffy = new Buffy(BUFFY);
     humanoids.push_back(buffy);
     moveHumanoid(*buffy, *randomCell(distribution(rd)));
 
     // Créer les humains
     vector<Human *> humans;
     for (size_t human = 0; human < nbHumans; ++human) {
-        humans.push_back(new Human(*this, HUMAN));
+        humans.push_back(new Human(HUMAN));
     }
     for (auto &it: humans) {
         humanoids.push_back(it);
@@ -44,7 +43,7 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
     // Créer les vampires
     vector<Vampire *> vampires;
     for (size_t vampire = 0; vampire < nbVampires; ++vampire) {
-        vampires.push_back(new Vampire(*this, VAMPIRE));
+        vampires.push_back(new Vampire(VAMPIRE));
     }
 
     for (auto &it: vampires) {
@@ -233,5 +232,13 @@ size_t Field::getWidth() const {
 
 size_t Field::getHeight() const {
     return height;
+}
+
+bool Field::hasVampireLeft() const {
+    return nbVampires > 0;
+}
+
+bool Field::hasHumanLeft() const {
+    return nbHumans > 0;
 }
 
