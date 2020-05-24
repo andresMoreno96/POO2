@@ -29,6 +29,10 @@ char HumanoidType::getRepresentation() const {
     return representation;
 }
 
+HumanoidType::~HumanoidType() {
+
+}
+
 BuffyType::BuffyType() : HumanoidType("buffy", BuffyType::representation) {
 
 }

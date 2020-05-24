@@ -78,8 +78,19 @@ int Field::nextTurn() {
     // Enlever les humanoides tués
     for (auto it = humanoids.begin(); it != humanoids.end();)
         if (!(*it)->isAlive()) {
+
+
+            cellRemoveAt(*it,(*it)->getCell());
+
             it = humanoids.erase(it); // suppression de l’élément dans la liste
-            delete *it;
+
+//            Cell *currentCell = (*it)->getCell();
+//
+//            if (currentCell != nullptr) {
+//                currentCell->removeHumanoid(reinterpret_cast<Humanoid &>(*it));
+//            }
+//            (*it)->setCell(nullptr);
+//             delete *it;
             // destruction de l’humanoide référencé
         } else
             ++it;
@@ -104,13 +115,7 @@ Humanoid * Field::nearestFrom(const Humanoid *from, const HumanoidType *type) co
             continue;
         }
 
-        // BV -> OV-OB
-
         double distance = getDistance(from, *it);
-//        int dx= (*it)->getX() - from->getX();
-//        int dy= (*it)->getY() - from->getY();
-//
-//        double distance = abs(sqrt(pow(dx,2)+pow(dy,2)));
 
         if (distance < nearestDistance) {
             nearestDistance = distance;
@@ -183,6 +188,10 @@ Cell *Field::cellAtPos(size_t x, size_t y) const {
     return cells.at(x + width * y);
 }
 
+void Field::cellRemoveAt(Humanoid* hum, Cell* cell )  {
+     cell->removeHumanoid(*hum);
+}
+
 
 void Field::processCommand(char command) {
 
@@ -240,15 +249,15 @@ double Field::calculateStats() const {
 Field::~Field() {
     // TODO: implement this
 
-    for (size_t i = 0; i < cells.size(); ++i) {
-        delete cells.at(i);
-    }
-
-    // Delete humanoids
-    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); ++it) {
-        it = humanoids.erase(it); // suppression de l’élément dans la liste
-        delete *it;
-    }
+//    for (size_t i = 0; i < cells.size(); ++i) {
+//        delete cells.at(i);
+//    }
+//
+//    // Delete humanoids
+//    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); ++it) {
+//        it = humanoids.erase(it); // suppression de l’élément dans la liste
+//        delete *it;
+//    }
 }
 
 size_t Field::getWidth() const {

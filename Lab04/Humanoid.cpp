@@ -9,6 +9,8 @@ Humanoid::Humanoid(const HumanoidType& type)
 }
 
 Humanoid::~Humanoid() {
+    type= nullptr;
+    cell= nullptr;
 
 }
 
@@ -45,6 +47,7 @@ void Humanoid::executeAction(Field& field) {
     if(action != nullptr) {
         action->execute(field);
     }
+    action= nullptr;
 }
 
 void Humanoid::setAlive(bool alive) {

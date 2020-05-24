@@ -12,6 +12,8 @@ public:
     HumanoidType(const HumanoidType& humType);
     const std::string& getType() const;
     char getRepresentation() const;
+
+    virtual ~HumanoidType();
 };
 
 class BuffyType : public HumanoidType {

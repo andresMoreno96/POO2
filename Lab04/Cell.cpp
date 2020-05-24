@@ -11,7 +11,7 @@ void Cell::addHumanoid(const Humanoid& humanoid) {
     humanoids.push_back(&humanoid);
 }
 
-void Cell::removeHumanoid(const Humanoid& humanoid) {
+void Cell::removeHumanoid(Humanoid& humanoid) {
     humanoids.remove(&humanoid);
 }
 
@@ -34,4 +34,8 @@ void Cell::display() const {
     } else {
         cout << ' ';
     }
+}
+
+Cell::~Cell() {
+
 }

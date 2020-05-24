@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-        Field field(10, 10, 4, 6);
+        Field field(10, 10, 10, 6);
         field.play();
 
 //    vector<size_t> valuesGrid;

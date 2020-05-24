@@ -4,9 +4,10 @@
 #include "Action.hpp"
 
 class VampireAttackAction : public Action {
+    Humanoid *target;
 
 public:
-    VampireAttackAction(Humanoid* humanoid);
+    VampireAttackAction(Humanoid* humanoid, Humanoid * target);
     void execute(Field& f);
 };
 

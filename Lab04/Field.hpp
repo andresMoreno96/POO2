@@ -65,6 +65,7 @@ private:
     double calculateStats()const;
     void processCommand(char command);
     void createGrid(size_t width, size_t height);
+    void cellRemoveAt(Humanoid *hum, Cell *cell);
 };
 
 #endif //BUFFY_FIELD_HPP

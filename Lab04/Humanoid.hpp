@@ -21,7 +21,6 @@ protected:
 
 public:
     Humanoid(const HumanoidType& type);
-    virtual ~Humanoid();
     virtual void setAction(const Field& field) = 0;
     void executeAction(Field& field);
     bool isAlive() const;
@@ -32,6 +31,7 @@ public:
     void display() const;
     int getX() const;
     int getY() const;
+    virtual ~Humanoid();
 
 };
 
