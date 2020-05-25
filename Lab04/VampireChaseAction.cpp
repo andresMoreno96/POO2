@@ -4,20 +4,21 @@
 
 #include "VampireChaseAction.hpp"
 
-VampireChaseAction::VampireChaseAction(Humanoid* humanoid) : MoveAction(humanoid) {}
+VampireChaseAction::VampireChaseAction(Humanoid* humanoid, const Humanoid* target) : MoveAction(humanoid),target(target) {}
 
 void VampireChaseAction::execute(Field &f) {
 
-    const Humanoid *hum = f.nearestFrom(humanoid, &Field::HUMAN);
-    if (hum != nullptr) {
+    if (target!= nullptr && target->isAlive()) {
 
-        int tmpx = (hum->getX() - humanoid->getX());
-        tmpx = tmpx==0 ? 0 : tmpx / abs(tmpx);
+            int tmpx = (target->getX() - humanoid->getX());
+            tmpx = tmpx == 0 ? 0 : tmpx / abs(tmpx);
 
-        int tmpy = (hum->getY() - humanoid->getY());
-        tmpy = tmpy==0 ? 0 : tmpy / abs(tmpy);
+            int tmpy = (target->getY() - humanoid->getY());
+            tmpy = tmpy == 0 ? 0 : tmpy / abs(tmpy);
 
-        f.moveHumanoid(*humanoid, humanoid->getX() + tmpx, humanoid->getY() + tmpy);
+            f.moveHumanoid(*humanoid, humanoid->getX() + tmpx, humanoid->getY() + tmpy);
+
 
     }
+
 }

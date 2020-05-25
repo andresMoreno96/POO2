@@ -9,7 +9,6 @@ BuffyChaseAction::BuffyChaseAction(Humanoid* humanoid, const Humanoid* target) :
 
 void BuffyChaseAction::execute(Field &f) {
 
-//    const Humanoid *vam = f.nearestFrom(humanoid, &Field::VAMPIRE);
     if (target!= nullptr) {
 
         for (size_t i = 0; i < 2; ++i) {

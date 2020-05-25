@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <random>
 #include <vector>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 
@@ -25,21 +25,10 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
     std::uniform_int_distribution<int> distribution(0, cells.size() - 1);
 
     // Créer les humanoids
-
     // Créer Buffy
     Buffy *buffy = new Buffy(BUFFY);
     humanoids.push_back(buffy);
     moveHumanoid(*buffy, randomCell(distribution(rd)));
-
-    // Créer les humains
-    vector<Human *> humans;
-    for (size_t human = 0; human < nbHumans; ++human) {
-        humans.push_back(new Human(HUMAN));
-    }
-    for (auto &it: humans) {
-        humanoids.push_back(it);
-        moveHumanoid(*it, randomCell(distribution(rd)));
-    }
 
     // Créer les vampires
     vector<Vampire *> vampires;
@@ -51,6 +40,17 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
         humanoids.push_back(it);
         moveHumanoid(*it, randomCell(distribution(rd)));
     }
+
+    // Créer les humains
+    vector<Human *> humans;
+    for (size_t human = 0; human < nbHumans; ++human) {
+        humans.push_back(new Human(HUMAN));
+    }
+    for (auto &it: humans) {
+        humanoids.push_back(it);
+        moveHumanoid(*it, randomCell(distribution(rd)));
+    }
+
 
 }
 
@@ -78,7 +78,6 @@ int Field::nextTurn() {
         if (!(*it)->isAlive()) {
             delete *it; // FIXME: dans la donnée le delete est après
             it = humanoids.erase(it); // suppression de l’élément dans la liste
-            // delete *it; // destruction de l’humanoide référencé
         }
         else
             ++it;
@@ -246,6 +245,14 @@ Field::~Field() {
 //        it = humanoids.erase(it); // suppression de l’élément dans la liste
 //        delete *it;
 //    }
+}
+
+void Field::addVamp(Humanoid *hum, Cell *cell) {
+
+    humanoids.push_back(hum);
+    moveHumanoid(*hum, cell);
+    ++nbVampires;
+
 }
 
 size_t Field::getWidth() const {

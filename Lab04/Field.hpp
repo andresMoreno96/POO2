@@ -51,6 +51,8 @@ public:
     void play();
     virtual ~Field();
 
+    void addVamp(Humanoid *hum, Cell* cell);
+
 private:
     Cell* cellAtPos(size_t x, size_t y) const;
     bool checkBounds(size_t x, size_t y) const;
@@ -61,6 +63,7 @@ private:
     void processCommand(char command);
     void createGrid(size_t width, size_t height);
     void cellRemoveAt(Humanoid *hum, Cell *cell);
+
 };
 
 #endif //BUFFY_FIELD_HPP

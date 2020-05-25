@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Humanoid.hpp"
+#include "Vampire.hpp"
 
 using namespace std;
 
@@ -14,12 +15,26 @@ Humanoid::~Humanoid() {
 
 }
 
-void Humanoid::die(Field& field) {
+void Humanoid::die(Field &field) {
     // Signaler que l'humanoid est mort
-    alive = false;
+    if(alive) {
 
-    // Enlever l'humanoid de la cellule
-    cell->removeHumanoid(*this);
+
+        std::random_device rd;
+        std::uniform_int_distribution<int> distribution(0, 1);
+
+        if(distribution(rd)) {
+            field.addVamp(new Vampire(Field::VAMPIRE), this->getCell());
+        }
+
+        alive = false;
+
+        // Enlever l'humanoid de la cellule
+        if (cell != nullptr) {
+            cell->removeHumanoid(*this);
+        }
+        cell = nullptr;
+    }
 }
 
 
@@ -52,8 +67,10 @@ void Humanoid::display() const {
 }
 
 void Humanoid::executeAction(Field& field) {
-    if(action != nullptr) {
-        action->execute(field);
+    if (alive) {
+        if (action != nullptr) {
+            action->execute(field);
+        }
     }
     action= nullptr;
 }

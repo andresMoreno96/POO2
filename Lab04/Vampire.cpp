@@ -2,7 +2,6 @@
 #include "Vampire.hpp"
 #include "VampireAttackAction.hpp"
 #include "VampireChaseAction.hpp"
-#include "RandomMoveAction.hpp"
 
 Vampire::Vampire(const HumanoidType &type) : Humanoid(type) {}
 
@@ -11,14 +10,16 @@ void Vampire::setAction(const Field &field)  {
     if (field.hasHumanLeft()) {
         Humanoid *hum = field.nearestFrom(this, &Field::HUMAN);
 
-        if (field.getDistance(this, hum) < 2) {
+        if (field.getDistance(this, hum) < 2) { //FIXME: MAGIC NUMB
+            std::cout<<"vamp attack"<<std::endl;
             action = std::make_unique<VampireAttackAction>(this, hum);
         } else{
-            action=std::make_unique<VampireChaseAction>(this);
+            std::cout<<"vamp chase"<<std::endl;
+            action=std::make_unique<VampireChaseAction>(this,hum);
         }
     } else{
-        //FIXME: THIS SHOULD BE SLEEP
-        action= std::make_unique<RandomMoveAction>(this);
+        //the vampire sleeps
+        action= nullptr;
     }
 
 }
@@ -28,7 +29,9 @@ Vampire::~Vampire() {
 }
 
 void Vampire::die(Field& field) {
+    if(isAlive()) {
+        field.setNbVampires(field.getNbVampires() - 1);
+    }
     Humanoid::die(field);
 
-    field.setNbVampires(field.getNbVampires() - 1);
 }

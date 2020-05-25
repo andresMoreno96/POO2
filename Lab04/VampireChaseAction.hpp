@@ -4,9 +4,11 @@
 #include "MoveAction.hpp"
 
 class VampireChaseAction : public MoveAction {
+private:
+    const Humanoid* target;
 
 public:
-    VampireChaseAction(Humanoid* humanoid);
+    VampireChaseAction(Humanoid* humanoid,const Humanoid* target);
 
     void execute(Field &f) override;
 };
