@@ -53,6 +53,7 @@ public:
     bool hasHumanLeft() const;
     double getDistance(const Humanoid *from, const Humanoid* target) const;
     void play();
+    void playStats();
     void addVamp(Humanoid *hum, Cell* cell);
     virtual ~Field();
 
@@ -67,8 +68,6 @@ private:
     double calculateStats()const;
     void processCommand(char command);
     void createGrid(size_t width, size_t height);
-
-    void playStats();
 };
 
 #endif //BUFFY_FIELD_HPP

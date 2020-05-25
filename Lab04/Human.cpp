@@ -8,7 +8,6 @@
 Human::Human(const HumanoidType &type) : Humanoid(type) {}
 
 void Human::setAction(const Field &field) {
-    std::cout<<"run human"<<std::endl;
     action = std::make_unique<RandomMoveAction>(this);
 }
 

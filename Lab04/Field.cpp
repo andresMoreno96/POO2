@@ -184,6 +184,8 @@ void Field::processCommand(char command) {
     if (command == NEXT) {
         nextTurn();
     } else if (command == STATS) {
+        cout<<"Calculating stats..."<<endl;
+        WINS=0;
         double simulation=calculateStats();
         cout<<"simulation % : "<<simulation<<endl;
     } else if (command == QUIT) {
@@ -196,28 +198,11 @@ void Field::processCommand(char command) {
 
 void Field::play() {
 
-    string input;
-    bool displayGrid=false;
-    cout<< "Want to display the gird? (y/n)"<<endl;
-
-    getline(cin, input, '\n');
-
-    //FIXME:check invalid input
-    if (input.size() > 0) {
-        char command = input[0];
-        if(command=='y'){
-            displayGrid= true;
-        }
-    }
+    string input = "";
     cout << endl;
 
-    input="";
     while (playing) {
-
-        if(displayGrid){
-            display();
-        }
-
+        display();
         cout << "[" << turn << "]" << " q)quit s)statistics n)nextTurn: ";
 
         getline(cin, input, '\n');
@@ -252,17 +237,16 @@ double Field::calculateStats() const {
 }
 
 Field::~Field() {
-    // TODO: implement this
+    for (size_t i = 0; i < cells.size(); ++i) {
+        delete cells.at(i);
+    }
 
-//    for (size_t i = 0; i < cells.size(); ++i) {
-//        delete cells.at(i);
-//    }
-//
-//    // Delete humanoids
-//    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); ++it) {
-//        it = humanoids.erase(it); // suppression de l’élément dans la liste
-//        delete *it;
-//    }
+    // Delete humanoids
+    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); ++it) {
+        delete *it;
+        it = humanoids.erase(it);
+
+    }
 }
 
 void Field::addVamp(Humanoid *hum, Cell *cell) {

@@ -11,10 +11,8 @@ void Vampire::setAction(const Field &field)  {
         Humanoid *hum = field.nearestFrom(this, &Field::HUMAN);
 
         if (field.getDistance(this, hum) < 2) { //FIXME: MAGIC NUMB
-            std::cout<<"vamp attack"<<std::endl;
             action = std::make_unique<VampireAttackAction>(this, hum);
         } else{
-            std::cout<<"vamp chase"<<std::endl;
             action=std::make_unique<VampireChaseAction>(this,hum);
         }
     } else{
