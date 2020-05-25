@@ -55,9 +55,8 @@ public:
     void play();
     void playStats();
     void addVamp(Humanoid *hum, Cell* cell);
+    double calculateStats()const;
     virtual ~Field();
-
-
 
 private:
     Cell* cellAtPos(size_t x, size_t y) const;
@@ -65,7 +64,7 @@ private:
     void moveHumanoid(Humanoid& humanoid, Cell *cell);
     Cell* randomCell(int random) const;
     void displayHorizontalBorder() const;
-    double calculateStats()const;
+
     void processCommand(char command);
     void createGrid(size_t width, size_t height);
 };

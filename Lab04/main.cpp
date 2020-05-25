@@ -33,7 +33,8 @@ int main() {
                 if (input.size() > 0) {
                     char command = input[0];
                     if (command == 'y') {
-                        field.playStats();
+                        cout << "Calculating.."<<endl;
+                        cout << "simulation % : " << field.calculateStats() << endl;
                     } else if (command == 'n') {
                         field.play();
                     } else {
