@@ -14,9 +14,13 @@ const BuffyType &Field::BUFFY = BuffyType();
 const VampireType &Field::VAMPIRE = VampireType();
 const HumanType &Field::HUMAN = HumanType();
 
+int Field::WINS=0;
+int Field::TOTAL_ROUNDS=10000;
+
 Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : width(width), height(height),
                                                                                 nbVampires(nbVampires),
-                                                                                nbHumans(nbHumans) {
+                                                                                nbHumans(nbHumans),initialNbVampires(nbVampires)
+                                                                                ,initialNbHumans(nbHumans) {
     // Générer la grille
     createGrid(width, height);
 
@@ -175,17 +179,13 @@ Cell *Field::cellAtPos(size_t x, size_t y) const {
     return cells.at(x + width * y);
 }
 
-
-void Field::cellRemoveAt(Humanoid* hum, Cell* cell )  {
-     cell->removeHumanoid(*hum);
-}
-
 void Field::processCommand(char command) {
 
     if (command == NEXT) {
         nextTurn();
     } else if (command == STATS) {
-        calculateStats();
+        double simulation=calculateStats();
+        cout<<"simulation % : "<<simulation<<endl;
     } else if (command == QUIT) {
         playing = false;
     } else {
@@ -228,9 +228,27 @@ void Field::play() {
     }
 }
 
+void Field::playStats(){
+    while (playing){
+        processCommand('n');
+        if(hasHumanLeft() && !hasVampireLeft()){
+            WINS++;
+        }
+        if(!hasVampireLeft()){
+            playing=false;
+        }
+    }
+
+}
+
 
 double Field::calculateStats() const {
-    return 0;
+    for(size_t i=0; i<TOTAL_ROUNDS; ++i){
+        Field tmp(width,height,initialNbVampires,initialNbHumans);
+        tmp.playStats();
+    }
+
+    return ((double)WINS/((double)TOTAL_ROUNDS))*100.0;
 }
 
 Field::~Field() {
@@ -255,13 +273,7 @@ void Field::addVamp(Humanoid *hum, Cell *cell) {
 
 }
 
-size_t Field::getWidth() const {
-    return width;
-}
 
-size_t Field::getHeight() const {
-    return height;
-}
 
 bool Field::hasVampireLeft() const {
     return nbVampires > 0;

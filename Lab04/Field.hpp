@@ -18,6 +18,12 @@ class Field {
     const char STATS = 's';
     const char QUIT = 'q';
 
+    static int WINS;
+    static int TOTAL_ROUNDS;
+
+    const size_t initialNbVampires;
+    const size_t initialNbHumans;
+
     bool playing = true;
 
     size_t turn =0;
@@ -39,8 +45,6 @@ public:
     Humanoid * nearestFrom(const Humanoid *from, const HumanoidType *type) const;
     bool moveHumanoid(Humanoid& humanoid, int coordX, int coordY);
     void display() const;
-    size_t getWidth() const;
-    size_t getHeight() const;
     void setNbHumans(size_t _nbHumans);
     void setNbVampires(size_t _nbVampires);
     size_t getNbHumans() const;
@@ -49,9 +53,10 @@ public:
     bool hasHumanLeft() const;
     double getDistance(const Humanoid *from, const Humanoid* target) const;
     void play();
+    void addVamp(Humanoid *hum, Cell* cell);
     virtual ~Field();
 
-    void addVamp(Humanoid *hum, Cell* cell);
+
 
 private:
     Cell* cellAtPos(size_t x, size_t y) const;
@@ -62,8 +67,8 @@ private:
     double calculateStats()const;
     void processCommand(char command);
     void createGrid(size_t width, size_t height);
-    void cellRemoveAt(Humanoid *hum, Cell *cell);
 
+    void playStats();
 };
 
 #endif //BUFFY_FIELD_HPP
