@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Vampire.hpp"
 #include "VampireAttackAction.hpp"
-#include "MoveAction.hpp"
 #include "VampireChaseAction.hpp"
 #include "RandomMoveAction.hpp"
 
@@ -25,5 +24,11 @@ void Vampire::setAction(const Field &field)  {
 }
 
 Vampire::~Vampire() {
-    std::cout<<"kill vamp "<<std::endl;
+
+}
+
+void Vampire::die(Field& field) {
+    Humanoid::die(field);
+
+    field.setNbVampires(field.getNbVampires() - 1);
 }

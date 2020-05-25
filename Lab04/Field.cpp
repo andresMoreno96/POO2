@@ -63,36 +63,24 @@ void Field::createGrid(size_t width, size_t height) {
     }
 }
 
-
+// NOTE: ne pas changer cette méthode, elle est tirée de la donnée !
 int Field::nextTurn() {
-    // NOTE: ne pas changer cette méthode, elle est tirée de la donnée !
-
     // Déterminer les prochaines actions
-    for (auto it = humanoids.begin(); it != humanoids.end(); it++)
+    for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); it++)
         (*it)->setAction(*this);
 
     // Executer les actions
-    for (auto it = humanoids.begin(); it != humanoids.end(); it++)
+    for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); it++)
         (*it)->executeAction(*this);
 
     // Enlever les humanoides tués
-    for (auto it = humanoids.begin(); it != humanoids.end();)
+    for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); )
         if (!(*it)->isAlive()) {
-
-
-            cellRemoveAt(*it,(*it)->getCell());
-
+            delete *it; // FIXME: dans la donnée le delete est après
             it = humanoids.erase(it); // suppression de l’élément dans la liste
-
-//            Cell *currentCell = (*it)->getCell();
-//
-//            if (currentCell != nullptr) {
-//                currentCell->removeHumanoid(reinterpret_cast<Humanoid &>(*it));
-//            }
-//            (*it)->setCell(nullptr);
-//             delete *it;
-            // destruction de l’humanoide référencé
-        } else
+            // delete *it; // destruction de l’humanoide référencé
+        }
+        else
             ++it;
 
     return turn++;
@@ -188,10 +176,10 @@ Cell *Field::cellAtPos(size_t x, size_t y) const {
     return cells.at(x + width * y);
 }
 
+
 void Field::cellRemoveAt(Humanoid* hum, Cell* cell )  {
      cell->removeHumanoid(*hum);
 }
-
 
 void Field::processCommand(char command) {
 
@@ -241,10 +229,10 @@ void Field::play() {
     }
 }
 
+
 double Field::calculateStats() const {
     return 0;
 }
-
 
 Field::~Field() {
     // TODO: implement this

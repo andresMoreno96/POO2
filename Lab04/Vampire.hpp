@@ -7,11 +7,9 @@ class Vampire: public Humanoid {
 
 public:
     Vampire(const HumanoidType &type);
-    using Humanoid::setAction;
-    void setAction(const Field &field) override;
     virtual ~Vampire();
-
-
+    void die(Field& field) override;
+    void setAction(const Field &field) override;
 };
 
 

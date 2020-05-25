@@ -3,21 +3,29 @@
 
 using namespace std;
 
+size_t Humanoid::counter = 0;
+
 Humanoid::Humanoid(const HumanoidType& type)
-: action(nullptr), type(&type), alive(true),cell(nullptr) {
+: action(nullptr), type(&type), alive(true), cell(nullptr), id(counter++) {
 
 }
 
 Humanoid::~Humanoid() {
-    type= nullptr;
-    cell= nullptr;
 
 }
+
+void Humanoid::die(Field& field) {
+    // Signaler que l'humanoid est mort
+    alive = false;
+
+    // Enlever l'humanoid de la cellule
+    cell->removeHumanoid(*this);
+}
+
 
 Cell* Humanoid::getCell() const {
     return cell;
 }
-
 
 int Humanoid::getX() const {
     return cell->getX();
@@ -50,7 +58,15 @@ void Humanoid::executeAction(Field& field) {
     action= nullptr;
 }
 
-void Humanoid::setAlive(bool alive) {
-    Humanoid::alive = alive;
+const size_t Humanoid::getId() const {
+    return id;
 }
 
+bool operator==(const Humanoid& lhs, const Humanoid& rhs) {
+    return lhs.getType() == rhs.getType() &&
+           lhs.getId() == rhs.getId();
+}
+
+bool operator!=(const Humanoid& lhs, const Humanoid& rhs) {
+    return !(rhs == lhs);
+}

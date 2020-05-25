@@ -41,15 +41,10 @@ public:
     void display() const;
     size_t getWidth() const;
     size_t getHeight() const;
-
     void setNbHumans(size_t _nbHumans);
-
     void setNbVampires(size_t _nbVampires);
-
     size_t getNbHumans() const;
-
     size_t getNbVampires() const;
-
     bool hasVampireLeft() const;
     bool hasHumanLeft() const;
     double getDistance(const Humanoid *from, const Humanoid* target) const;

@@ -11,6 +11,8 @@ public:
     void setAction(const Field &field) override;
     virtual ~Human();
 
+    void die(Field& field) override;
+
 };
 
 
