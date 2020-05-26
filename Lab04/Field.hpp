@@ -54,6 +54,10 @@ public:
     double getDistance(const Humanoid *from, const Humanoid* target) const;
     void play();
     void playStats();
+    void createHumanoid(const VampireType& type, Cell *cell);
+    void createHumanoid(const BuffyType& type, Cell *cell);
+    void createHumanoid(const HumanType& type, Cell *cell);
+    void addHumanoid(Humanoid* hum, Cell* cell);
     void addVamp(Humanoid *hum, Cell* cell);
     double calculateStats()const;
     virtual ~Field();

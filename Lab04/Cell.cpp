@@ -15,10 +15,6 @@ void Cell::removeHumanoid(Humanoid& humanoid) {
     humanoids.remove(&humanoid);
 }
 
-const std::list<const Humanoid *>& Cell::getHumanoids() const {
-    return humanoids;
-}
-
 int Cell::getX() const {
     return X;
 }

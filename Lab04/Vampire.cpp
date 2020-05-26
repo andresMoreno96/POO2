@@ -3,7 +3,7 @@
 #include "VampireAttackAction.hpp"
 #include "VampireChaseAction.hpp"
 
-Vampire::Vampire(const HumanoidType &type) : Humanoid(type) {}
+Vampire::Vampire() : Humanoid(Field::VAMPIRE) {}
 
 void Vampire::setAction(const Field &field)  {
 
@@ -15,9 +15,9 @@ void Vampire::setAction(const Field &field)  {
         } else{
             action=std::make_unique<VampireChaseAction>(this,hum);
         }
-    } else{
-        //the vampire sleeps
-        action= nullptr;
+    } else {
+        // the vampire sleeps
+        action = nullptr;
     }
 
 }
@@ -27,9 +27,10 @@ Vampire::~Vampire() {
 }
 
 void Vampire::die(Field& field) {
-    if(isAlive()) {
-        field.setNbVampires(field.getNbVampires() - 1);
+    if(!isAlive()) {
+        return;
     }
-    Humanoid::die(field);
 
+    field.setNbVampires(field.getNbVampires() - 1);
+    Humanoid::die(field);
 }

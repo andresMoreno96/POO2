@@ -6,7 +6,7 @@
 class Human: public Humanoid {
 
 public:
-    Human(const HumanoidType &type);
+    Human();
     using Humanoid::setAction;
     void setAction(const Field &field) override;
     virtual ~Human();

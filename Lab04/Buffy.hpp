@@ -6,7 +6,7 @@
 class Buffy: public Humanoid {
 
 public:
-    Buffy(const HumanoidType &type);
+    Buffy();
     using Humanoid::setAction;
     void setAction(const Field &field) override;
     virtual ~Buffy();

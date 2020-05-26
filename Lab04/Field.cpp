@@ -18,9 +18,8 @@ int Field::WINS=0;
 int Field::TOTAL_ROUNDS=10000;
 
 Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : width(width), height(height),
-                                                                                nbVampires(nbVampires),
-                                                                                nbHumans(nbHumans),initialNbVampires(nbVampires)
-                                                                                ,initialNbHumans(nbHumans) {
+                                                                                initialNbVampires(nbVampires),
+                                                                                initialNbHumans(nbHumans) {
     // Générer la grille
     createGrid(width, height);
 
@@ -30,32 +29,17 @@ Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : 
 
     // Créer les humanoids
     // Créer Buffy
-    Buffy *buffy = new Buffy(BUFFY);
-    humanoids.push_back(buffy);
-    moveHumanoid(*buffy, randomCell(distribution(rd)));
+    createHumanoid(Field::BUFFY, randomCell(distribution(rd)));
 
     // Créer les vampires
-    vector<Vampire *> vampires;
     for (size_t vampire = 0; vampire < nbVampires; ++vampire) {
-        vampires.push_back(new Vampire(VAMPIRE));
-    }
-
-    for (auto &it: vampires) {
-        humanoids.push_back(it);
-        moveHumanoid(*it, randomCell(distribution(rd)));
+        createHumanoid(Field::VAMPIRE, randomCell(distribution(rd)));
     }
 
     // Créer les humains
-    vector<Human *> humans;
     for (size_t human = 0; human < nbHumans; ++human) {
-        humans.push_back(new Human(HUMAN));
+        createHumanoid(Field::HUMAN, randomCell(distribution(rd)));
     }
-    for (auto &it: humans) {
-        humanoids.push_back(it);
-        moveHumanoid(*it, randomCell(distribution(rd)));
-    }
-
-
 }
 
 
@@ -80,7 +64,7 @@ int Field::nextTurn() {
     // Enlever les humanoides tués
     for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); )
         if (!(*it)->isAlive()) {
-            delete *it; // FIXME: dans la donnée le delete est après
+            delete *it; // destruction de l’humanoide référencé
             it = humanoids.erase(it); // suppression de l’élément dans la liste
         }
         else
@@ -249,15 +233,27 @@ Field::~Field() {
     }
 }
 
-void Field::addVamp(Humanoid *hum, Cell *cell) {
-
-    humanoids.push_back(hum);
-    moveHumanoid(*hum, cell);
-    ++nbVampires;
-
+void Field::createHumanoid(const BuffyType& type, Cell *cell) {
+    Buffy* buffy = new Buffy();
+    addHumanoid(buffy, cell);
 }
 
+void Field::createHumanoid(const VampireType& type, Cell *cell) {
+    Vampire* vampire = new Vampire();
+    ++nbVampires;
+    addHumanoid(vampire, cell);
+}
 
+void Field::createHumanoid(const HumanType& type, Cell *cell) {
+    Human* human = new Human();
+    ++nbHumans;
+    addHumanoid(human, cell);
+}
+
+void Field::addHumanoid(Humanoid *hum, Cell *cell) {
+    humanoids.push_back(hum);
+    moveHumanoid(*hum, cell);
+}
 
 bool Field::hasVampireLeft() const {
     return nbVampires > 0;
@@ -282,4 +278,3 @@ size_t Field::getNbHumans() const {
 size_t Field::getNbVampires() const {
     return nbVampires;
 }
-

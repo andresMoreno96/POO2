@@ -16,24 +16,15 @@ Humanoid::~Humanoid() {
 }
 
 void Humanoid::die(Field &field) {
-    // Signaler que l'humanoid est mort
     if(alive) {
-
-
-        std::random_device rd;
-        std::uniform_int_distribution<int> distribution(0, 1);
-
-        if(distribution(rd)) {
-            field.addVamp(new Vampire(Field::VAMPIRE), this->getCell());
-        }
-
+        // Signal that the humanoid died
         alive = false;
 
         // Enlever l'humanoid de la cellule
         if (cell != nullptr) {
             cell->removeHumanoid(*this);
+            cell = nullptr;
         }
-        cell = nullptr;
     }
 }
 

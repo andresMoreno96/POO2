@@ -17,7 +17,6 @@ public:
     Cell(int x, int y);
     void addHumanoid(const Humanoid& humanoid);
     void removeHumanoid(Humanoid& humanoid);
-    const std::list<const Humanoid*>& getHumanoids() const;
     int getX() const;
     int getY() const;
     void display() const;

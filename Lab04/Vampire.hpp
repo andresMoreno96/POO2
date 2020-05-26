@@ -6,7 +6,7 @@
 class Vampire: public Humanoid {
 
 public:
-    Vampire(const HumanoidType &type);
+    Vampire();
     virtual ~Vampire();
     void die(Field& field) override;
     void setAction(const Field &field) override;

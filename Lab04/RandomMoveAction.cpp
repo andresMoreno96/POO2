@@ -13,38 +13,31 @@ void RandomMoveAction::execute(Field &f) {
 
     int randNumb = distribution(rd);
     bool canMove = false;
+
     do {
         switch (randNumb) {
-            case 0:
+            case 0: // North-West
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX() - 1, humanoid->getY() - 1);
                 break;
-
-            case 1:
-
+            case 1: // North
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX(), humanoid->getY() - 1);
                 break;
-            case 2:
-
+            case 2: // North-East
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX() + 1, humanoid->getY() - 1);
                 break;
-            case 3:
-
+            case 3: // West
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX() - 1, humanoid->getY());
                 break;
-            case 4:
-
+            case 4: // East
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX() + 1, humanoid->getY());
                 break;
-            case 5:
-
+            case 5: // South-West
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX() - 1, humanoid->getY() + 1);
                 break;
-            case 6:
-
+            case 6: // South
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX(), humanoid->getY() + 1);
                 break;
-            case 7:
-
+            case 7: // South-East
                 canMove = f.moveHumanoid(*humanoid, humanoid->getX() + 1, humanoid->getY() + 1);
                 break;
 

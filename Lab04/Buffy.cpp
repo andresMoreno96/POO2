@@ -5,7 +5,7 @@
 #include "RandomMoveAction.hpp"
 #include "BuffyChaseAction.hpp"
 
-Buffy::Buffy(const HumanoidType &type) : Humanoid(type) {}
+Buffy::Buffy() : Humanoid(Field::BUFFY) {}
 
 void Buffy::setAction(const Field &field) {
 
