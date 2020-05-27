@@ -12,18 +12,17 @@ void Human::setAction(const Field &field) {
 }
 
 void Human::die(Field& field) {
-    if(!isAlive()) {
-        return;
-    }
+    if(isAlive()) {
 
-    field.setNbHumans(field.getNbHumans() - 1);
+        field.setNbHumans(field.getNbHumans() - 1);
 
-    // Probability to spawn a vampire
-    std::random_device rd;
-    std::uniform_int_distribution<int> distribution(0, 1);
+        // Probability to spawn a vampire
+        std::random_device rd;
+        std::uniform_int_distribution<int> distribution(0, 1);
 
-    if(distribution(rd)) {
-        field.createHumanoid(Field::VAMPIRE, this->getCell());
+        if (distribution(rd)) {
+            field.createHumanoid(Field::VAMPIRE, this->getCell());
+        }
     }
 
     Humanoid::die(field);

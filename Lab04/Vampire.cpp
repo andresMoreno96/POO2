@@ -8,6 +8,7 @@ Vampire::Vampire() : Humanoid(Field::VAMPIRE) {}
 void Vampire::setAction(const Field &field)  {
 
     if (field.hasHumanLeft()) {
+
         Humanoid *hum = field.nearestFrom(this, &Field::HUMAN);
 
         if (field.getDistance(this, hum) < 2) { //FIXME: MAGIC NUMB
@@ -23,10 +24,9 @@ void Vampire::setAction(const Field &field)  {
 }
 
 void Vampire::die(Field& field) {
-    if(!isAlive()) {
-        return;
+    if(isAlive()) {
+        field.setNbVampires(field.getNbVampires() - 1);
     }
 
-    field.setNbVampires(field.getNbVampires() - 1);
     Humanoid::die(field);
 }

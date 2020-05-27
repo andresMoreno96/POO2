@@ -28,8 +28,8 @@ class Field {
     size_t turn = 0;
     size_t width;
     size_t height;
-    size_t nbHumans;
-    size_t nbVampires;
+    size_t nbHumans = 0;
+    size_t nbVampires = 0;
 
     std::vector<Cell*> cells;
     std::list<Humanoid*> humanoids;
@@ -66,7 +66,6 @@ private:
     void moveHumanoid(Humanoid& humanoid, Cell *cell);
     Cell* randomCell(int random) const;
     void displayHorizontalBorder() const;
-
     void processCommand(char command);
     void createGrid(size_t width, size_t height);
 };
