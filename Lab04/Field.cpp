@@ -14,8 +14,8 @@ const BuffyType &Field::BUFFY = BuffyType();
 const VampireType &Field::VAMPIRE = VampireType();
 const HumanType &Field::HUMAN = HumanType();
 
-int Field::WINS=0;
-int Field::TOTAL_ROUNDS=10000;
+int Field::wins=0;
+int Field::totalRounds=10000;
 
 Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : width(width), height(height),
                                                                                 initialNbVampires(nbVampires),
@@ -169,7 +169,7 @@ void Field::processCommand(char command) {
         nextTurn();
     } else if (command == STATS) {
         cout<<"Calculating stats..."<<endl;
-        WINS=0;
+        wins=0;
         double simulation=calculateStats();
         cout<<"simulation % : "<<simulation<<endl;
     } else if (command == QUIT) {
@@ -201,7 +201,7 @@ void Field::playStats(){
     while (playing){
         processCommand('n');
         if(hasHumanLeft() && !hasVampireLeft()){
-            WINS++;
+            wins++;
         }
         if(!hasVampireLeft()){
             playing=false;
@@ -212,12 +212,12 @@ void Field::playStats(){
 
 
 double Field::calculateStats() const {
-    for(size_t i=0; i<TOTAL_ROUNDS; ++i){
+    for(size_t i=0; i < totalRounds; ++i){
         Field tmp(width,height,initialNbVampires,initialNbHumans);
         tmp.playStats();
     }
 
-    return ((double)WINS/((double)TOTAL_ROUNDS))*100.0;
+    return ((double)wins / ((double)totalRounds)) * 100.0;
 }
 
 Field::~Field() {
@@ -263,12 +263,12 @@ bool Field::hasHumanLeft() const {
     return nbHumans > 0;
 }
 
-void Field::setNbHumans(size_t _nbHumans) {
-    nbHumans = _nbHumans;
+void Field::setNbHumans(size_t nbHumans) {
+    this->nbHumans = nbHumans;
 }
 
-void Field::setNbVampires(size_t _nbVampires) {
-    nbVampires = _nbVampires;
+void Field::setNbVampires(size_t nbVampires) {
+    this->nbVampires = nbVampires;
 }
 
 size_t Field::getNbHumans() const {

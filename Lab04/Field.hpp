@@ -12,21 +12,20 @@ class Cell;
 class Humanoid;
 
 class Field {
-
     //GAME CONSTANTS
-    const char NEXT = 'n';
-    const char STATS = 's';
-    const char QUIT = 'q';
+    static const char NEXT = 'n';
+    static const char STATS = 's';
+    static const char QUIT = 'q';
 
-    static int WINS;
-    static int TOTAL_ROUNDS;
+    static int wins;
+    static int totalRounds;
 
     const size_t initialNbVampires;
     const size_t initialNbHumans;
 
     bool playing = true;
 
-    size_t turn =0;
+    size_t turn = 0;
     size_t width;
     size_t height;
     size_t nbHumans;
@@ -45,8 +44,8 @@ public:
     Humanoid * nearestFrom(const Humanoid *from, const HumanoidType *type) const;
     bool moveHumanoid(Humanoid& humanoid, int coordX, int coordY);
     void display() const;
-    void setNbHumans(size_t _nbHumans);
-    void setNbVampires(size_t _nbVampires);
+    void setNbHumans(size_t nbHumans);
+    void setNbVampires(size_t nbVampires);
     size_t getNbHumans() const;
     size_t getNbVampires() const;
     bool hasVampireLeft() const;
@@ -58,7 +57,6 @@ public:
     void createHumanoid(const BuffyType& type, Cell *cell);
     void createHumanoid(const HumanType& type, Cell *cell);
     void addHumanoid(Humanoid* hum, Cell* cell);
-    void addVamp(Humanoid *hum, Cell* cell);
     double calculateStats()const;
     virtual ~Field();
 
