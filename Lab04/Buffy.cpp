@@ -22,8 +22,3 @@ void Buffy::setAction(const Field &field) {
         action = std::make_unique<RandomMoveAction>(this);
     }
 }
-
-
-Buffy::~Buffy() {
-
-}

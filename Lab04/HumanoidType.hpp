@@ -20,7 +20,6 @@ class BuffyType : public HumanoidType {
     static const std::string type;
     static const char representation;
 public:
-
     BuffyType();
 };
 

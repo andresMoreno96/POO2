@@ -7,11 +7,7 @@ class Buffy: public Humanoid {
 
 public:
     Buffy();
-    using Humanoid::setAction;
     void setAction(const Field &field) override;
-    virtual ~Buffy();
-
-
 };
 
 

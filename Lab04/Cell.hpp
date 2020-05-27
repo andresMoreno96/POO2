@@ -9,8 +9,8 @@
 class Humanoid;
 
 class Cell {
-    const int X;
-    const int Y;
+    const int x;
+    const int y;
     std::list<const Humanoid*> humanoids;
 
 public:

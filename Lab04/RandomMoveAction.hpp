@@ -7,9 +7,7 @@ class RandomMoveAction : public MoveAction {
 
 public:
     RandomMoveAction(Humanoid* humanoid);
-
     void execute(Field &f) override;
-
 };
 
 #endif //BUFFY_RANDOMMOVEACTION_HPP

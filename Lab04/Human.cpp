@@ -28,7 +28,3 @@ void Human::die(Field& field) {
 
     Humanoid::die(field);
 }
-
-Human::~Human() {
-
-}

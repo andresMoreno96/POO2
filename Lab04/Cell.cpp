@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Cell::Cell(int x, int y) : X(x), Y(y) {
+Cell::Cell(int x, int y) : x(x), y(y) {
 
 }
 
@@ -16,11 +16,11 @@ void Cell::removeHumanoid(Humanoid& humanoid) {
 }
 
 int Cell::getX() const {
-    return X;
+    return x;
 }
 
 int Cell::getY() const {
-    return Y;
+    return y;
 }
 
 void Cell::display() const {

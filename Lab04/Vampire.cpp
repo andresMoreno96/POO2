@@ -22,10 +22,6 @@ void Vampire::setAction(const Field &field)  {
 
 }
 
-Vampire::~Vampire() {
-
-}
-
 void Vampire::die(Field& field) {
     if(!isAlive()) {
         return;
