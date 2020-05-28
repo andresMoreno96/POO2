@@ -10,9 +10,8 @@
 RandomMoveAction::RandomMoveAction(Humanoid* humanoid) : MoveAction(humanoid) {}
 
 void RandomMoveAction::execute(Field &f) {
-
-    std::random_device rd;
-    std::uniform_int_distribution<int> distribution(0, 7);
+    static std::random_device rd;
+    static std::uniform_int_distribution<int> distribution(0, 7);
 
     int randNumb = distribution(rd);
     bool canMove = false;
