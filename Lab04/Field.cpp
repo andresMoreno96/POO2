@@ -24,27 +24,23 @@ const HumanType &Field::HUMAN = HumanType();
 int Field::wins=0;
 int Field::totalRounds=10000;
 
-Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : width(width), height(height),
-                                                                                initialNbVampires(nbVampires),
-                                                                                initialNbHumans(nbHumans) {
+Field::Field(size_t width, size_t height, size_t initialNbVampires, size_t initialNbHumans) : width(width), height(height),
+                                                                                              initialNbVampires(initialNbVampires),
+                                                                                              initialNbHumans(initialNbHumans) {
     // generate grid
     createGrid(width, height);
 
-    // for random placement
-    std::random_device rd;
-    std::uniform_int_distribution<int> distribution(0, cells.size() - 1);
-
     // create Buffy
-    createHumanoid(Field::BUFFY, randomCell(distribution(rd)));
+    createHumanoid(Field::BUFFY, randomCell());
 
     // create vampires
-    for (size_t vampire = 0; vampire < nbVampires; ++vampire) {
-        createHumanoid(Field::VAMPIRE, randomCell(distribution(rd)));
+    for (size_t vampire = 0; vampire < initialNbVampires; ++vampire) {
+        createHumanoid(Field::VAMPIRE, randomCell());
     }
 
     // create humans
-    for (size_t human = 0; human < nbHumans; ++human) {
-        createHumanoid(Field::HUMAN, randomCell(distribution(rd)));
+    for (size_t human = 0; human < initialNbHumans; ++human) {
+        createHumanoid(Field::HUMAN, randomCell());
     }
 }
 
@@ -78,9 +74,9 @@ int Field::nextTurn() {
     return turn++;
 }
 
-double Field::getDistance(const Humanoid *from, const Humanoid* target) const {
-    int dx= target->getX() - from->getX();
-    int dy= target->getY() - from->getY();
+double Field::getDistance(const Humanoid *first, const Humanoid* second) const {
+    int dx= second->getX() - first->getX();
+    int dy= second->getY() - first->getY();
 
     return abs(sqrt(pow(dx,2)+pow(dy,2)));
 
@@ -107,8 +103,11 @@ Humanoid * Field::nearestFrom(const Humanoid *from, const HumanoidType *type) co
 }
 
 
-Cell *Field::randomCell(int random) const {
-    return cells.at(random);
+Cell* Field::randomCell() const {
+    static std::random_device rd;
+    static std::uniform_int_distribution<int> distribution(0, cells.size() - 1);
+
+    return cells.at(distribution(rd));
 }
 
 bool Field::moveHumanoid(Humanoid &humanoid, int coordX, int coordY) {

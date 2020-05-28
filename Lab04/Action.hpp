@@ -14,13 +14,29 @@
 class Field;
 class Humanoid;
 
+/**
+ * Represents action taken by humanoids
+ */
 class Action {
 
 protected:
     Humanoid* humanoid;
 public:
+    /**
+     * Constructor
+     * @param humanoid the humanoid taking the action
+     */
     Action(Humanoid* humanoid);
+
+    /**
+     * Destructor
+     */
     virtual ~Action();
+
+    /**
+     * Execute the action
+     * @param f the field on which the action is taken
+     */
     virtual void execute(Field& f) = 0;
 };
 

@@ -10,10 +10,23 @@
 
 #include "Action.hpp"
 
+/**
+ * Represents a vampire attack action
+ */
 class VampireAttackAction : public Action {
     Humanoid *target;
 public:
+    /**
+     * Constructor
+     * @param humanoid the humanoid making the attack
+     * @param target the target of the attack
+     */
     VampireAttackAction(Humanoid* humanoid, Humanoid * target);
+
+    /**
+     * Execute the attack
+     * @param f the field on which the attack is made
+     */
     void execute(Field& f);
 };
 

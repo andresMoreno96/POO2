@@ -10,10 +10,23 @@
 
 #include "MoveAction.hpp"
 
+/**
+ * Represents the vampire chase action
+ */
 class VampireChaseAction : public MoveAction {
     const Humanoid* target;
 public:
+    /**
+     * Constructor
+     * @param humanoid the humanoid chasing
+     * @param target the humanoid that is being chased
+     */
     VampireChaseAction(Humanoid* humanoid,const Humanoid* target);
+
+    /**
+     * Execute the vampire chase action
+     * @param f the field on which the chase is made
+     */
     void execute(Field &f) override;
 };
 

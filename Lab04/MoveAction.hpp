@@ -10,11 +10,22 @@
 
 #include "Action.hpp"
 
+/**
+ * Represents a move action
+ */
 class MoveAction : public Action {
 
 public:
+    /**
+     * Constructor
+     * @param humanoid the humanoid to move
+     */
     MoveAction(Humanoid* humanoid);
 
+    /**
+     * Execute the action
+     * @param f the field where the action takes place
+     */
     void execute(Field &f) = 0;
 };
 
