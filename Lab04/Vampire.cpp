@@ -1,4 +1,10 @@
-#include <iostream>
+/*
+ * File:   Vampire.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 20, 2020
+ */
+
 #include "Vampire.hpp"
 #include "VampireAttackAction.hpp"
 #include "VampireChaseAction.hpp"

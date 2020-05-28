@@ -1,3 +1,10 @@
+/*
+ * File:   Cell.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 7, 2020
+ */
+
 #include "Cell.hpp"
 #include <iostream>
 

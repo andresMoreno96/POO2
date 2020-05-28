@@ -1,3 +1,10 @@
+/*
+ * File:   Cell.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 7, 2020
+ */
+
 #ifndef BUFFY_CELL_HPP
 #define BUFFY_CELL_HPP
 

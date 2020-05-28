@@ -1,3 +1,10 @@
+/*
+ * File:   HumanoidType.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 7, 2020
+ */
+
 #ifndef BUFFY_HUMANOIDTYPE_HPP
 #define BUFFY_HUMANOIDTYPE_HPP
 

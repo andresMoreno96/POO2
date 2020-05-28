@@ -1,3 +1,10 @@
+/*
+ * File:   VampireChaseAction.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
+
 #ifndef BUFFY_VAMPIRECHASEACTION_HPP
 #define BUFFY_VAMPIRECHASEACTION_HPP
 

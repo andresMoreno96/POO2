@@ -1,3 +1,10 @@
+/*
+ * File:   MoveAction.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
+
 #ifndef BUFFY_MOVEACTION_HPP
 #define BUFFY_MOVEACTION_HPP
 

@@ -1,3 +1,10 @@
+/*
+ * File:   BuffyAttackAction.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
+
 #ifndef BUFFY_BUFFYATTACKACTION_HPP
 #define BUFFY_BUFFYATTACKACTION_HPP
 

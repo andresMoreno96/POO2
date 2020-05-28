@@ -1,3 +1,10 @@
+/*
+ * File:   Vampire.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 20, 2020
+ */
+
 #ifndef BUFFY_VAMPIRE_HPP
 #define BUFFY_VAMPIRE_HPP
 

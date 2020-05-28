@@ -1,6 +1,9 @@
-//
-// Created by simon on 22.05.20.
-//
+/*
+ * File:   RandomMoveAction.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
 
 #include "RandomMoveAction.hpp"
 

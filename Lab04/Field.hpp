@@ -1,3 +1,10 @@
+/*
+ * File:   Field.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 7, 2020
+ */
+
 #ifndef BUFFY_FIELD_HPP
 #define BUFFY_FIELD_HPP
 
@@ -11,6 +18,9 @@
 class Cell;
 class Humanoid;
 
+/**
+ * Represents a field and manage the "game"
+ */
 class Field {
     //GAME CONSTANTS
     static const char NEXT = 'n';

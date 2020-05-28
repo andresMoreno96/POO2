@@ -1,6 +1,12 @@
+/*
+ * File:   Humanoid.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 7, 2020
+ */
+
 #include <iostream>
 #include "Humanoid.hpp"
-#include "Vampire.hpp"
 
 using namespace std;
 

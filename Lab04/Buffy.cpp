@@ -1,6 +1,11 @@
-#include <iostream>
+/*
+ * File:   Buffy.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 20, 2020
+ */
+
 #include "Buffy.hpp"
-#include "MoveAction.hpp"
 #include "BuffyAttackAction.hpp"
 #include "RandomMoveAction.hpp"
 #include "BuffyChaseAction.hpp"

@@ -1,3 +1,10 @@
+/*
+ * File:   Human.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 20, 2020
+ */
+
 #ifndef BUFFY_HUMAN_HPP
 #define BUFFY_HUMAN_HPP
 

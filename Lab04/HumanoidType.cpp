@@ -1,6 +1,9 @@
-//
-// Created by simon on 08.05.20.
-//
+/*
+ * File:   HumanoidType.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 7, 2020
+ */
 
 #include "HumanoidType.hpp"
 

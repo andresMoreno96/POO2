@@ -1,3 +1,10 @@
+/*
+ * File:   Field.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 7, 2020
+ */
+
 #include "Field.hpp"
 #include "Buffy.hpp"
 #include "Human.hpp"
@@ -20,23 +27,22 @@ int Field::totalRounds=10000;
 Field::Field(size_t width, size_t height, size_t nbVampires, size_t nbHumans) : width(width), height(height),
                                                                                 initialNbVampires(nbVampires),
                                                                                 initialNbHumans(nbHumans) {
-    // Générer la grille
+    // generate grid
     createGrid(width, height);
 
-    //for random placement
+    // for random placement
     std::random_device rd;
     std::uniform_int_distribution<int> distribution(0, cells.size() - 1);
 
-    // Créer les humanoids
-    // Créer Buffy
+    // create Buffy
     createHumanoid(Field::BUFFY, randomCell(distribution(rd)));
 
-    // Créer les vampires
+    // create vampires
     for (size_t vampire = 0; vampire < nbVampires; ++vampire) {
         createHumanoid(Field::VAMPIRE, randomCell(distribution(rd)));
     }
 
-    // Créer les humains
+    // create humans
     for (size_t human = 0; human < nbHumans; ++human) {
         createHumanoid(Field::HUMAN, randomCell(distribution(rd)));
     }
@@ -51,7 +57,6 @@ void Field::createGrid(size_t width, size_t height) {
     }
 }
 
-// NOTE: ne pas changer cette méthode, elle est tirée de la donnée !
 int Field::nextTurn() {
     // Déterminer les prochaines actions
     for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); it++)
@@ -151,7 +156,7 @@ void Field::display() const {
     displayHorizontalBorder();
 }
 
-void Field::displayHorizontalBorder() const {// Afficher barre horizontale
+void Field::displayHorizontalBorder() const {
     cout << setw(width * 2 + 2) << setfill('-') << left << "+" << "+" << endl;
 }
 

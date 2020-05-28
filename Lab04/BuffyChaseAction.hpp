@@ -1,3 +1,10 @@
+/*
+ * File:   BuffyChaseAction.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
+
 #ifndef BUFFY_BUFFYCHASEACTION_HPP
 #define BUFFY_BUFFYCHASEACTION_HPP
 

@@ -1,9 +1,14 @@
+/*
+ * File:   Human.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 20, 2020
+ */
+
 #include <memory>
 #include <iostream>
 #include "Human.hpp"
-#include "MoveAction.hpp"
 #include "RandomMoveAction.hpp"
-#include "Vampire.hpp"
 
 Human::Human() : Humanoid(Field::HUMAN) {}
 

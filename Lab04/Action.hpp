@@ -1,3 +1,10 @@
+/*
+ * File:   Action.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 8, 2020
+ */
+
 #ifndef BUFFY_ACTION_HPP
 #define BUFFY_ACTION_HPP
 

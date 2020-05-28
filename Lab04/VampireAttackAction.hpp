@@ -1,3 +1,10 @@
+/*
+ * File:   VampireAttackAction.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
+
 #ifndef BUFFY_VAMPIREATTACKACTION_HPP
 #define BUFFY_VAMPIREATTACKACTION_HPP
 

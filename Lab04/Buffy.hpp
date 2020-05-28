@@ -1,3 +1,10 @@
+/*
+ * File:   Buffy.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 20, 2020
+ */
+
 #ifndef BUFFY_BUFFY_HPP
 #define BUFFY_BUFFY_HPP
 

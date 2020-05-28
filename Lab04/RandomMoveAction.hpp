@@ -1,3 +1,10 @@
+/*
+ * File:   RandomMoveAction.hpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
+
 #ifndef BUFFY_RANDOMMOVEACTION_HPP
 #define BUFFY_RANDOMMOVEACTION_HPP
 

@@ -1,6 +1,9 @@
-//
-// Created by simon on 22.05.20.
-//
+/*
+ * File:   BuffyChaseAction.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 22, 2020
+ */
 
 #include "BuffyChaseAction.hpp"
 #include "Vampire.hpp"
