@@ -20,7 +20,7 @@ public:
      * Constructor
      * @param humanoid the humanoid to move randomly
      */
-    RandomMoveAction(Humanoid* humanoid);
+    RandomMoveAction(Humanoid *humanoid);
 
     /**
      * Execute the action

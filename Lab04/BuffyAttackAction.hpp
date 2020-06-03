@@ -23,13 +23,13 @@ public:
      * @param humanoid the humanoid making the attack
      * @param target the target of the attack
      */
-    BuffyAttackAction(Humanoid* humanoid, Humanoid* target);
+    BuffyAttackAction(Humanoid *humanoid, Humanoid *target);
 
     /**
      * Execute the attack
      * @param f the field on which the attack is made
      */
-    void execute(Field& f);
+    void execute(Field &f);
 };
 
 #endif //BUFFY_BUFFYATTACKACTION_HPP

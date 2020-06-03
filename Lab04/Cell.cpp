@@ -14,11 +14,11 @@ Cell::Cell(int x, int y) : x(x), y(y) {
 
 }
 
-void Cell::addHumanoid(const Humanoid& humanoid) {
+void Cell::addHumanoid(const Humanoid &humanoid) {
     humanoids.push_back(&humanoid);
 }
 
-void Cell::removeHumanoid(Humanoid& humanoid) {
+void Cell::removeHumanoid(Humanoid &humanoid) {
     humanoids.remove(&humanoid);
 }
 
@@ -31,7 +31,7 @@ int Cell::getY() const {
 }
 
 void Cell::display() const {
-    if(humanoids.size() > 0) {
+    if (humanoids.size() > 0) {
         // print first humanoid of list
         humanoids.front()->display();
     } else {

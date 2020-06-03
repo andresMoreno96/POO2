@@ -20,7 +20,7 @@ public:
      * Constructor
      * @param humanoid the humanoid to move
      */
-    MoveAction(Humanoid* humanoid);
+    MoveAction(Humanoid *humanoid);
 
     /**
      * Execute the action

@@ -21,12 +21,11 @@ const BuffyType &Field::BUFFY = BuffyType();
 const VampireType &Field::VAMPIRE = VampireType();
 const HumanType &Field::HUMAN = HumanType();
 
-int Field::wins=0;
-int Field::totalRounds=10000;
+int Field::wins = 0;
+int Field::totalRounds = 10000;
 
-Field::Field(size_t width, size_t height, size_t initialNbVampires, size_t initialNbHumans) : width(width), height(height),
-                                                                                              initialNbVampires(initialNbVampires),
-                                                                                              initialNbHumans(initialNbHumans) {
+Field::Field(size_t width, size_t height, size_t initialNbVampires, size_t initialNbHumans) :
+        width(width), height(height), initialNbVampires(initialNbVampires), initialNbHumans(initialNbHumans) {
     // generate grid
     createGrid(width, height);
 
@@ -55,34 +54,33 @@ void Field::createGrid(size_t width, size_t height) {
 
 int Field::nextTurn() {
     // Déterminer les prochaines actions
-    for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); it++)
+    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); it++)
         (*it)->setAction(*this);
 
     // Executer les actions
-    for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); it++)
+    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end(); it++)
         (*it)->executeAction(*this);
 
     // Enlever les humanoides tués
-    for (list<Humanoid*>::iterator it = humanoids.begin(); it != humanoids.end(); )
+    for (list<Humanoid *>::iterator it = humanoids.begin(); it != humanoids.end();)
         if (!(*it)->isAlive()) {
-            delete *it; // destruction de l’humanoide référencé
-            it = humanoids.erase(it); // suppression de l’élément dans la liste
-        }
-        else
+            delete *it; // destruction of the referenced humanoide
+            it = humanoids.erase(it); // suppression of the element in the list
+        } else
             ++it;
 
     return turn++;
 }
 
-double Field::getDistance(const Humanoid *first, const Humanoid* second) const {
-    int dx= second->getX() - first->getX();
-    int dy= second->getY() - first->getY();
+double Field::getDistance(const Humanoid *first, const Humanoid *second) const {
+    int dx = second->getX() - first->getX();
+    int dy = second->getY() - first->getY();
 
-    return abs(sqrt(pow(dx,2)+pow(dy,2)));
+    return abs(sqrt(pow(dx, 2) + pow(dy, 2)));
 
 }
 
-Humanoid * Field::nearestFrom(const Humanoid *from, const HumanoidType *type) const {
+Humanoid *Field::nearestFrom(const Humanoid *from, const HumanoidType *type) const {
     double nearestDistance = numeric_limits<double>::max();
     Humanoid *nearest = nullptr;
 
@@ -103,7 +101,7 @@ Humanoid * Field::nearestFrom(const Humanoid *from, const HumanoidType *type) co
 }
 
 
-Cell* Field::randomCell() const {
+Cell *Field::randomCell() const {
     static std::random_device rd;
     static std::uniform_int_distribution<int> distribution(0, cells.size() - 1);
 
@@ -172,10 +170,10 @@ void Field::processCommand(char command) {
     if (command == NEXT) {
         nextTurn();
     } else if (command == STATS) {
-        cout<<"Calculating stats..."<<endl;
-        wins=0;
-        double simulation=calculateStats();
-        cout<<"simulation % : "<<simulation<<endl;
+        cout << "Calculating stats..." << endl;
+        wins = 0;
+        double simulation = calculateStats();
+        cout << "simulation % : " << simulation << endl;
     } else if (command == QUIT) {
         playing = false;
     } else {
@@ -201,14 +199,14 @@ void Field::play() {
     }
 }
 
-void Field::playStats(){
-    while (playing){
+void Field::playStats() {
+    while (playing) {
         processCommand('n');
-        if(hasHumanLeft() && !hasVampireLeft()){
+        if (hasHumanLeft() && !hasVampireLeft()) {
             wins++;
         }
-        if(!hasVampireLeft()){
-            playing=false;
+        if (!hasVampireLeft()) {
+            playing = false;
         }
     }
 
@@ -216,12 +214,12 @@ void Field::playStats(){
 
 
 double Field::calculateStats() const {
-    for(size_t i=0; i < totalRounds; ++i){
-        Field tmp(width,height,initialNbVampires,initialNbHumans);
+    for (size_t i = 0; i < totalRounds; ++i) {
+        Field tmp(width, height, initialNbVampires, initialNbHumans);
         tmp.playStats();
     }
 
-    return ((double)wins / ((double)totalRounds)) * 100.0;
+    return ((double) wins / ((double) totalRounds)) * 100.0;
 }
 
 Field::~Field() {
@@ -237,19 +235,19 @@ Field::~Field() {
     }
 }
 
-void Field::createHumanoid(const BuffyType& type, Cell *cell) {
-    Buffy* buffy = new Buffy();
+void Field::createHumanoid(const BuffyType &type, Cell *cell) {
+    Buffy *buffy = new Buffy();
     addHumanoid(buffy, cell);
 }
 
-void Field::createHumanoid(const VampireType& type, Cell *cell) {
-    Vampire* vampire = new Vampire();
+void Field::createHumanoid(const VampireType &type, Cell *cell) {
+    Vampire *vampire = new Vampire();
     ++nbVampires;
     addHumanoid(vampire, cell);
 }
 
-void Field::createHumanoid(const HumanType& type, Cell *cell) {
-    Human* human = new Human();
+void Field::createHumanoid(const HumanType &type, Cell *cell) {
+    Human *human = new Human();
     ++nbHumans;
     addHumanoid(human, cell);
 }

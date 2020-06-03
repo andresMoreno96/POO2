@@ -14,14 +14,14 @@
  * Represents the chase action of Buffy
  */
 class BuffyChaseAction : public MoveAction {
-    const Humanoid* target;
+    const Humanoid *target;
 public:
     /**
      * Constructor
      * @param humanoid the humanoid chasing
      * @param target the humanoid that is being chased
      */
-    BuffyChaseAction(Humanoid* humanoid, const Humanoid* target);
+    BuffyChaseAction(Humanoid *humanoid, const Humanoid *target);
 
     /**
      * Execute the buffy chase action

@@ -1,3 +1,9 @@
+/*
+ * File:   Main.cpp
+ * Author: Andres Moreno, Simon Walther
+ *
+ * Created on May 8, 2020
+ */
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -6,8 +12,6 @@
 using namespace std;
 
 int main() {
-//        Field field(10, 10, 1, 10);
-//        field.play();
 
     vector<size_t> valuesGrid;
 

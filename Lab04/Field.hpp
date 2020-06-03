@@ -16,6 +16,7 @@
 #include "HumanoidType.hpp"
 
 class Cell;
+
 class Humanoid;
 
 /**
@@ -41,13 +42,13 @@ class Field {
     size_t nbHumans = 0;
     size_t nbVampires = 0;
 
-    std::vector<Cell*> cells;
-    std::list<Humanoid*> humanoids;
+    std::vector<Cell *> cells;
+    std::list<Humanoid *> humanoids;
 
 public:
-    static const BuffyType& BUFFY;
-    static const HumanType& HUMAN;
-    static const VampireType& VAMPIRE;
+    static const BuffyType &BUFFY;
+    static const HumanType &HUMAN;
+    static const VampireType &VAMPIRE;
 
     /**
      * Constructor
@@ -75,7 +76,7 @@ public:
      * @param type the type of the desired nearest humanoid
      * @return the nearest humanoid
      */
-    Humanoid* nearestFrom(const Humanoid *from, const HumanoidType *type) const;
+    Humanoid *nearestFrom(const Humanoid *from, const HumanoidType *type) const;
 
     /**
      * Move a humanoid to a given coordinate
@@ -84,7 +85,7 @@ public:
      * @param coordY the y coordinate
      * @return if the move has succeeded
      */
-    bool moveHumanoid(Humanoid& humanoid, int coordX, int coordY);
+    bool moveHumanoid(Humanoid &humanoid, int coordX, int coordY);
 
     /**
      * Display the field
@@ -133,7 +134,7 @@ public:
      * @param second the second humanoid
      * @return the distance
      */
-    double getDistance(const Humanoid *first, const Humanoid* second) const;
+    double getDistance(const Humanoid *first, const Humanoid *second) const;
 
     /**
      * Play the "game", prompting the user for action
@@ -150,28 +151,28 @@ public:
      * @param type the type of the humanoid
      * @param cell the cell where to creates the humanoid
      */
-    void createHumanoid(const VampireType& type, Cell *cell);
+    void createHumanoid(const VampireType &type, Cell *cell);
 
     /**
      * Create a humanoid of buffy type and moves it to a given cell
      * @param type the type of the humanoid
      * @param cell the cell where to creates the humanoid
      */
-    void createHumanoid(const BuffyType& type, Cell *cell);
+    void createHumanoid(const BuffyType &type, Cell *cell);
 
     /**
      * Create a humanoid of human type and moves it to a given cell
      * @param type the type of the humanoid
      * @param cell the cell where to creates the humanoid
      */
-    void createHumanoid(const HumanType& type, Cell *cell);
+    void createHumanoid(const HumanType &type, Cell *cell);
 
     /**
      * Add an existing humanoid to the field at a given cell
      * @param hum the humanoid
      * @param cell the cell where to put the humanoid
      */
-    void addHumanoid(Humanoid* hum, Cell* cell);
+    void addHumanoid(Humanoid *hum, Cell *cell);
 
     /**
      * Calculates stats with this field properties
@@ -186,7 +187,7 @@ private:
      * @param y the y coordinate
      * @return the cell
      */
-    Cell* cellAtPos(size_t x, size_t y) const;
+    Cell *cellAtPos(size_t x, size_t y) const;
 
     /**
      * Check if a coordinates is inside the field's bounds
@@ -201,13 +202,13 @@ private:
      * @param humanoid the humanoid to move
      * @param cell the cell on which to put the humanoid
      */
-    void moveHumanoid(Humanoid& humanoid, Cell *cell);
+    void moveHumanoid(Humanoid &humanoid, Cell *cell);
 
     /**
      * Get a random cell of this field
      * @return the cell
      */
-    Cell* randomCell() const;
+    Cell *randomCell() const;
 
     /**
      * Display an horizontal bar

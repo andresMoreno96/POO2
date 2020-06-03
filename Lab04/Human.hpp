@@ -13,7 +13,7 @@
 /**
  * Represents a human
  */
-class Human: public Humanoid {
+class Human : public Humanoid {
 
 public:
     /**
@@ -25,7 +25,7 @@ public:
      * Makes this human die
      * @param field the field where the human dies
      */
-    void die(Field& field) override;
+    void die(Field &field) override;
 
     /**
      * Set the next action that the human will take on a field

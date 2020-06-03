@@ -22,7 +22,7 @@ class Humanoid;
 class Cell {
     const int x;
     const int y;
-    std::list<const Humanoid*> humanoids;
+    std::list<const Humanoid *> humanoids;
 
 public:
     /**
@@ -41,13 +41,13 @@ public:
      * Add a humanoid on this cell
      * @param humanoid the humanoid to add
      */
-    void addHumanoid(const Humanoid& humanoid);
+    void addHumanoid(const Humanoid &humanoid);
 
     /**
      * Removes the humanoid from this cell
      * @param humanoid the humanoid to remove
      */
-    void removeHumanoid(Humanoid& humanoid);
+    void removeHumanoid(Humanoid &humanoid);
 
     /**
      * Get the x coordinate

@@ -16,8 +16,8 @@ void Human::setAction(const Field &field) {
     action = std::make_unique<RandomMoveAction>(this);
 }
 
-void Human::die(Field& field) {
-    if(isAlive()) {
+void Human::die(Field &field) {
+    if (isAlive()) {
 
         field.setNbHumans(field.getNbHumans() - 1);
 

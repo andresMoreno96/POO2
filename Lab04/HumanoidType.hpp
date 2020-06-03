@@ -23,7 +23,7 @@ public:
      * @param type the type name
      * @param representation the character representing this type of humanoid
      */
-    HumanoidType(const std::string& type, const char representation);
+    HumanoidType(const std::string &type, const char representation);
 
     /**
      * Destructor
@@ -34,13 +34,13 @@ public:
      * Constructor
      * @param humType the type name
      */
-    HumanoidType(const HumanoidType& humType);
+    HumanoidType(const HumanoidType &humType);
 
     /**
      * Get the type's name
      * @return the type
      */
-    const std::string& getType() const;
+    const std::string &getType() const;
 
     /**
      * Get the representation
@@ -88,7 +88,8 @@ public:
     HumanType();
 };
 
-bool operator==(const HumanoidType& lhs, const HumanoidType& rhs);
-bool operator!=(const HumanoidType& lhs, const HumanoidType& rhs);
+bool operator==(const HumanoidType &lhs, const HumanoidType &rhs);
+
+bool operator!=(const HumanoidType &lhs, const HumanoidType &rhs);
 
 #endif //BUFFY_HUMANOIDTYPE_HPP
